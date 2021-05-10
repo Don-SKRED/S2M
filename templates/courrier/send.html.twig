@@ -107,12 +107,12 @@
                         <td>{{ courrier.recipient.email }}</td>
                         <td>{{ courrier.nomC }}</td>
                         <td>    {% if courrier.status == "TRES URGENT" %}
-                                <span style="padding: 7px; border-radius: 50px; color:#fff;"> {{ courrier.status }} </span>
+                                <span style="padding: 7px; border-radius: 50px; "> {{ courrier.status }} </span>
                             {% elseif courrier.status == "URGENT" %}
-                                <span style="padding: 7px; border-radius: 50px; color:#fff;"> {{ courrier.status }} </span>
+                                <span style="padding: 7px; border-radius: 50px;"> {{ courrier.status }} </span>
 
                             {% else %}
-                                <span style="padding: 7px; border-radius: 50px; color:#fff;"> {{ courrier.status }} </span>
+                                <span style="padding: 7px; border-radius: 50px;"> {{ courrier.status }} </span>
                             {% endif %}
                         <td>{{ courrier.fichier }}</td>
                         <td>{{ courrier.createdAt|date}}</td>

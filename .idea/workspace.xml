@@ -2,24 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7f47f34-5228-4c17-97b6-cec99e2f4578" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/projet-2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/projet-2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-6093d01d37a11.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-6094fd67d4bea.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-609522a826189.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-609523c560fe8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-60952479e0515.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-60952626b856e.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-6095279ea2ff4.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-609527ed90b79.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-6095282b41217.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-60952fc082412.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur2-6097bd1ed1219.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur2-6097ca877dbf3.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur2-6097caf198d08.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur2-6097cb44b9b17.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/test.xlsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/pageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/pageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/after_log/page.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/after_log/page.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/exShow.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/exShow.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/courrier/received.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/received.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/send.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/send.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,6 +279,7 @@
       <workItem from="1620372223344" duration="3919000" />
       <workItem from="1620386273395" duration="3950000" />
       <workItem from="1620556194424" duration="24744000" />
+      <workItem from="1620625535033" duration="6978000" />
     </task>
     <servers />
   </component>

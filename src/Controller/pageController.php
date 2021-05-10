@@ -124,7 +124,12 @@ class pageController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {$file = $courrier->getFichier();
             $filename = md5(uniqid()).'.'.$file->getClientOriginalExtension();
+
+
             $file->move($this->getParameter('upload_directory'), $filename);
+            //$fileSystem = new Filesystem();
+            //$fileSystem->chmod($this->getParameter('upload_directory'),0777,0000, false);
+
             $courrier->setFichier($filename);
             //prendre l'envoyeur
             $courrier->setSender($this->getUser());
@@ -163,7 +168,7 @@ class pageController extends AbstractController
         $path = $this->getParameter('upload_directory').'\\'.$file;
         $info = new \SplFileInfo($path);
 
-        //$fileSystem = new Filesystem();
+       // $fileSystem = new Filesystem();
         //$fileSystem->chmod($info->getPath(),7777);
 
         $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($info->getPathname());
@@ -172,7 +177,8 @@ class pageController extends AbstractController
         $spreadsheet = $reader->load($info->getPathname());
         $writer = IOFactory::createWriter($spreadsheet, 'Html');
         $message = $writer->save('php://output');
-       // $message = $writer->save($info->getPathname());
+
+
 
 
         $arrayDataExcel = $spreadsheet->getActiveSheet()->toArray();
@@ -218,7 +224,7 @@ class pageController extends AbstractController
         //dump($arrayDataExcel);die;
 
         //echo $message;
-        return new Response ("Vous êtes connecté");
+        return new Response ("ok");
     }
 
 

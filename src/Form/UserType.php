@@ -37,11 +37,8 @@ class UserType extends AbstractType
                     'Administrateur' => 'ROLE_ADMIN',
                   ],
                 ])
-            ->add('Status',CheckboxType::class,[
-
-                'label' => 'Actif',
-
-            ])
+            ->add('Status',CheckboxType::class,
+                ['label' => 'Actif','required'=>false])
             ->add('Password', RepeatedType::class, [
 
                 'type' => PasswordType::class,
