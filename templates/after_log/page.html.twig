@@ -152,6 +152,7 @@
                                                 <div class="modal-body">
 
                                                     {{ form_start(form) }}
+
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             {{ form_label(form.nom_c)}}
@@ -171,6 +172,9 @@
                                                             {{ form_widget(form.fichier)}}
                                                         </div>
                                                         <div class="form-group">
+                                                            {% set var = user.nom  %}
+                                                            {{ user.nom }}
+
                                                             {{ form_label(form.recipient)}}
                                                             {{ form_widget(form.recipient)}}
                                                         </div>

@@ -107,8 +107,9 @@ class pageController extends AbstractController
      */
     public function index(): Response
     {
+        $user = $this->getUser();
         return $this->render('courrier/index.html.twig', [
-            'controller_name' => 'CourrierController',
+            "user" => $user,
         ]);
     }
 

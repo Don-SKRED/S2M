@@ -27,7 +27,7 @@ class Courrier
     private $nom_c;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", nullable=false)
      */
     private $notes;
 
@@ -62,6 +62,8 @@ class Courrier
      * @ORM\Column(type="string", length=255)
      */
     private $fichier;
+
+
 
 
     public function __construct()
@@ -170,5 +172,6 @@ class Courrier
 
         return $this;
     }
+
 
 }

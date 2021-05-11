@@ -23,7 +23,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path("received") }}">Boites de receptions</a>
-                            <a class="dropdown-item" href="{{ path("send") }}">Courrier envoyésr</a>
+                            <a class="dropdown-item" href="{{ path("send") }}">Courrier envoyés</a>
                             {#<div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Something else here</a>#}
                         </div>
@@ -84,6 +84,7 @@
                                 <th>email</th>
                                 <th>Nom du courrier</th>
                                 <th>Status</th>
+                                <th>Notes</th>
                                 <th>Courrier</th>
                                 <th>Date</th>
                                 <th>Actions</th>
@@ -99,18 +100,20 @@
                                     {% if courrier.status == "TRES URGENT" %}
                                     <span style="background-color: #D31C1C; padding: 7px; border-radius: 50px; color:#fff;"> {{ courrier.status }} </span>
                                     {% elseif courrier.status == "URGENT" %}
-                                        <span style="background-color: #F37D2C; padding: 7px; border-radius: 50px; color:#fff;"> {{ courrier.status }} </span>
+                                        <span style="background-color: #DCD61E; padding: 7px; border-radius: 50px; color:#fff;"> {{ courrier.status }} </span>
 
                                         {% else %}
                                             <span style="background-color: #28A2E8; padding: 7px; border-radius: 50px; color:#fff;"> {{ courrier.status }} </span>
                                     {% endif %}
                                 </td>
+                                <td>{{ courrier.notes() }}</td>
                                 <td>{{ courrier.fichier }}</td>
-                                <td>{{ courrier.createdAt|date}}</td>
+                                <td>{{ courrier.createdAt|date("m/d/Y")}}</td>
+                                {#|date("m/d/Y")#}
 
                                 <td>
                                     <a href="{{ path("excel", {id: courrier.id}) }}" class="btn btn-info">Voir</a>
-                                    <a href="{{asset('uploads/'~courrier.fichier)}}" class="btn btn-dark">Telecharger</a>
+                                    <a href="{{asset('Courrier/'~courrier.fichier)}}" class="btn btn-dark">Telecharger</a>
                                 </td>
                             </tr>
                             {% else %}

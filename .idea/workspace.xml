@@ -4,25 +4,21 @@
     <list default="true" id="e7f47f34-5228-4c17-97b6-cec99e2f4578" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-6093d01d37a11.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-6094fd67d4bea.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-609522a826189.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-609523c560fe8.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-60952479e0515.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-60952626b856e.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-6095279ea2ff4.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-609527ed90b79.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-6095282b41217.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur1-60952fc082412.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur2-6097bd1ed1219.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur2-6097ca877dbf3.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur2-6097caf198d08.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/Classeur2-6097cb44b9b17.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/test.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/up_files/Classeur2-6098d96704ad6.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/uploads/up_files/Classeur2-6098db3bb1157.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/pageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/pageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Courrier.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Courrier.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/after_log/page.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/after_log/page.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/exShow.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/exShow.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courrier/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courrier/received.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/received.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/send.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/send.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,7 +275,8 @@
       <workItem from="1620372223344" duration="3919000" />
       <workItem from="1620386273395" duration="3950000" />
       <workItem from="1620556194424" duration="24744000" />
-      <workItem from="1620625535033" duration="6978000" />
+      <workItem from="1620625535033" duration="20409000" />
+      <workItem from="1620711986773" duration="8814000" />
     </task>
     <servers />
   </component>
@@ -315,6 +312,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1619374484516" />
+    <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620654239186">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1620654239186" />
     <state x="144" y="52" width="1081" height="714" key="dock-window-1" timestamp="1619374284261">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -323,9 +324,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="379" y="96" width="607" height="536" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1620590505694" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1620587258689">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1620653777741">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1620587258689" />
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1620653777741" />
   </component>
 </project>

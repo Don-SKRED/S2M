@@ -115,7 +115,7 @@
                                 <span style="padding: 7px; border-radius: 50px;"> {{ courrier.status }} </span>
                             {% endif %}
                         <td>{{ courrier.fichier }}</td>
-                        <td>{{ courrier.createdAt|date}}</td>
+                        <td>{{ courrier.createdAt|date("m/d/Y")}}</td>
 
                     </tr>
                     {% else %}

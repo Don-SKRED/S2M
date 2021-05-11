@@ -53,12 +53,12 @@
 
                     <div class="dropdown">
                         <li class="nav-item">
-                            <span class="mr-2 d-none d-flex text-gray-600 small"> {{ user.Nom }}</span>
+                            <span class="mr-2 d-none d-flex text-gray-600 small"> {{ user_co.Nom }}</span>
                             <img src ="{{asset('assets/svg/undraw_profile.svg')}}" class="img-profile rounded-circle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                 <p class="dropdown-item">
-                                <h2>IP:</h2><p>{{ user.IP }}</p>
-                                <h2>Nom:</h2><p>{{ user.Nom }}</p></p>
+                                <h2>IP:</h2><p>{{ user_co.IP }}</p>
+                                <h2>Nom:</h2><p>{{ user_co.Nom }}</p></p>
 
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>

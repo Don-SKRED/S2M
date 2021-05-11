@@ -70,8 +70,11 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
+        $user_co = $this->getUser();
+
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'user_co' => $user_co
         ]);
     }
 

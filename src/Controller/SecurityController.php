@@ -15,6 +15,7 @@ class SecurityController extends AbstractController
     public function home(AuthenticationUtils $authenticationUtils): Response
     {
         /* if ($this->getUser()) {
+             //return $this->redirectToRoute('page_index',array('id'=> $this->getUser()->getId()));
              return $this->redirectToRoute('page_index',array('id'=> $this->getUser()->getId()));
          }*/
        return new Response ("Vous êtes connecté");  
@@ -24,7 +25,10 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-
+         if ($this->getUser()) {
+             //return $this->redirectToRoute('page_index',array('id'=> $this->getUser()->getId()));
+             return $this->redirectToRoute('page_index',array('id'=> $this->getUser()->getId()));
+         }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
