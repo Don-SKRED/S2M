@@ -1,0 +1,2 @@
+#"unable to write .... in the directory"
+#solution temporaire "changer le chemin de reception des courriers
