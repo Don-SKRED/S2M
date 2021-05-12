@@ -80,3 +80,24 @@ input:checked[type="checkbox"]:before
     border-bottom: 1px solid #e3e6f0;
     margin:20px;
 }
+.scroll-to-top
+{ position: fixed;
+    right: 7rem;
+    bottom: 1rem;
+    display: none;
+    width: 5rem;
+    height: 5rem;
+    text-align: center;
+    color: #fff;
+    /*background: rgba(90,92,105,.5);*/
+    line-height: 46px;
+    opacity: 0.8;
+}
+  .card-trap
+  {
+    margin: 50px;
+  }
+  .jo
+  {
+      margin-right:10px;
+  }

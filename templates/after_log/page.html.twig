@@ -56,7 +56,7 @@
                     <h6 class="dropdown-header text-center" >CENTRE COURRIER</h6>
                     {% for use in app.user.received %}
                     <a href="#" class="d-flex hope" style="height:4rem;">
-                        <div >
+                        <div class ="jo">
                             <img class="rounded-circle" src="{{ asset('assets/svg/abstract-user.svg') }}">
                         </div>
                         <div style="display:block;">
@@ -96,8 +96,8 @@
 
                 <div class="dropdown">
                      <li class="nav-item">
-                        <span class="mr-2 d-none d-flex text-gray-600 small"> {{ user.Nom }}</span>
-                        <img src ="{{asset('assets/svg/undraw_profile.svg')}}" class="img-profile rounded-circle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {# <span class="mr-2 d-none d-flex text-gray-600 small"> {{ user.Nom }}</span> #}
+                        <img src ="{{asset('assets/svg/4.png')}}" class="img-profile rounded-circle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <p class="dropdown-item">
                             <h2>IP:</h2><p>{{ user.IP }}</p>
@@ -240,8 +240,6 @@
 
             </div>
         </section>
-
-
 
 
     {% endblock %}

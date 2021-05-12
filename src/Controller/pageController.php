@@ -116,31 +116,37 @@ class pageController extends AbstractController
     /**
      * @Route("/send", name="send")
      */
-    public function send(Request $request):Response
+    public function send(Request $request, FlashyNotifier $flashy):Response
     {
         $courrier = new Courrier();
         $user = $this->getUser();
         $form = $this->createForm(CourrierType::class,$courrier);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {$file = $courrier->getFichier();
-            $filename = md5(uniqid()).'.'.$file->getClientOriginalExtension();
 
+     if($form->isSubmitted() && $form->isValid())
+       {
+           $file = $courrier->getFichier();
+           $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+           $typemimes = $file->getClientMimeType();
+           // this is needed to safely include the file name as part of the URL
+           $newFilename = $originalFilename.'-'.uniqid().'.'.$file->getClientOriginalExtension();
 
-            $file->move($this->getParameter('upload_directory'), $filename);
-            //$fileSystem = new Filesystem();
-            //$fileSystem->chmod($this->getParameter('upload_directory'),0777,0000, false);
+           // envoye du fichier sur la base de données
+           //  $filename = $file->getClientOriginalName();
+           $UploadedFile = $file->move($this->getParameter('upload_directory'), $newFilename);
+           //dump($test->getPathname());die;
+           $courrier->setFichier($newFilename);
 
-            $courrier->setFichier($filename);
-            //prendre l'envoyeur
-            $courrier->setSender($this->getUser());
-            $em =$this->getDoctrine()->getManager();
-            $em->persist($courrier);
-            $em->flush();
+           //prendre l'envoyeur
+           $courrier->setSender($this->getUser());
+           $em =$this->getDoctrine()->getManager();
+           $em->persist($courrier);
+           $em->flush();;
 
-            //message flash
-            $this->addFlash("courrier","Courrier envoyé avec succès");
-            return $this->redirectToRoute("courrier");
+            //mercuryflash
+        $flashy->success('Courrier envoyé avec succès!');
+
+            return $this->redirectToRoute("send");
         }
 
 
@@ -152,11 +158,39 @@ class pageController extends AbstractController
     /**
      * @Route("/received", name="received")
      */
-    public function received(): Response
+    public function received(Request $request, FlashyNotifier $flashy): Response
     {
-        $user = $this->getUser();
+        $courrier = new Courrier();
+       $user = $this->getUser();
+       $form = $this->createForm(CourrierType::class,$courrier);
+       $form->handleRequest($request);
+       if($form->isSubmitted() && $form->isValid())
+       {
+           $file = $courrier->getFichier();
+           $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+           $typemimes = $file->getClientMimeType();
+           // this is needed to safely include the file name as part of the URL
+           $newFilename = $originalFilename.'-'.uniqid().'.'.$file->getClientOriginalExtension();
+
+           // envoye du fichier sur la base de données
+           //  $filename = $file->getClientOriginalName();
+           $UploadedFile = $file->move($this->getParameter('upload_directory'), $newFilename);
+           //dump($test->getPathname());die;
+           $courrier->setFichier($newFilename);
+
+           //prendre l'envoyeur
+           $courrier->setSender($this->getUser());
+           $em =$this->getDoctrine()->getManager();
+           $em->persist($courrier);
+           $em->flush();
+           //mercuryflash
+        $flashy->success('Courrier envoyé avec succès!');
+
+            return $this->redirectToRoute("send");
+      }
         return $this->render('courrier/received.html.twig',[
-            "user" => $user,
+            "form" => $form->createView(),
+             "user" => $user,
         ]);
     }
     /**

@@ -4,7 +4,9 @@
     <list default="true" id="e7f47f34-5228-4c17-97b6-cec99e2f4578" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/pageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/pageController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/after_log/page.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/after_log/page.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courrier/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/received.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/received.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/send.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/send.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/edit.html.twig" afterDir="false" />
@@ -270,6 +272,7 @@
       <workItem from="1620625535033" duration="20409000" />
       <workItem from="1620711986773" duration="20995000" />
       <workItem from="1620796430245" duration="12463000" />
+      <workItem from="1620822716354" duration="3280000" />
     </task>
     <servers />
   </component>
@@ -305,10 +308,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1619374484516" />
-    <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620654239186">
+    <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620825888211">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1620654239186" />
+    <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1620825888211" />
     <state x="144" y="52" width="1081" height="714" key="dock-window-1" timestamp="1619374284261">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
