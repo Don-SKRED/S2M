@@ -59,3 +59,24 @@ input:checked[type="checkbox"]:before
 .d-sm-block {
     display: block!important;
 }
+.drop
+{
+    margin:0;
+    padding : 0;
+    width:20rem;
+}
+.dropdown-header
+{
+    background-color: #A2A0E1 ;/*#4e73df;*/
+    border:1px solid #A2A0E1 ;
+    color: #fff;
+    margin-top: 0;
+}
+.rounded-circle
+{
+    height: 50px;
+}
+.hope,.hope1{
+    border-bottom: 1px solid #e3e6f0;
+    margin:20px;
+}
