@@ -17,7 +17,7 @@ $(document).ready(function($) {
                 },
             },
             //spécifier pour la table courrier
-            "order": [[0, 'desc'], [1, 'desc'], [2, 'desc'], [3, 'desc'], [4, 'desc'], [5, 'desc']]
+        //    "order": [[0, 'desc'], [1, 'desc'], [2, 'desc'], [3, 'desc'], [4, 'desc'], [5, 'desc']]
             /* "columnDefs": [
                  {
                      "orderSequence" : [ "asc", "desc" ],

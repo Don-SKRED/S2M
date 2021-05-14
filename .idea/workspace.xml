@@ -3,10 +3,31 @@
   <component name="ChangeListManager">
     <list default="true" id="e7f47f34-5228-4c17-97b6-cec99e2f4578" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-6098e9fd98efe.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-6098ea78f09ae.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-6098ef2ba109b.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-6098f0f5d9f2e.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-60991e5114245.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-6099249b3c11e.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-6099250430cf9.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-60992b354efcb.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-60993a084b0b8.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-60993a3a34a88.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609a194c82c71.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609a2b41cc308.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609a2b7bf2cee.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609a3b28e2340.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609b8047364c8.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609b8090235dc.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609b80f3e1a73.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609b8e97af3e4.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609bd35e8d3af.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/Courrier/RecapCA-02-03-2021_au_04-03-2021-1617170880-6099185d29409.xlsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/pageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/pageController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/after_log/page.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/after_log/page.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/courrier/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/received.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/received.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/send.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/send.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/edit.html.twig" afterDir="false" />
@@ -273,6 +294,8 @@
       <workItem from="1620711986773" duration="20995000" />
       <workItem from="1620796430245" duration="12463000" />
       <workItem from="1620822716354" duration="3280000" />
+      <workItem from="1620927092617" duration="4302000" />
+      <workItem from="1620974170835" duration="5386000" />
     </task>
     <servers />
   </component>
@@ -296,10 +319,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="269" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1620200577872" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1619174862381">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1620979377554">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1619174862381" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1620979377554" />
     <state x="465" y="84" width="620" height="656" key="#projet-2" timestamp="1617342250255">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

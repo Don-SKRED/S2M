@@ -23,6 +23,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 /**
  * @Route("/page")
  * Class PageController
@@ -33,7 +34,7 @@ class pageController extends AbstractController
     /**
      * @Route("/home/{id}", name="page_index", methods={"GET","POST"})
      */
-    public function show(Request $request, FlashyNotifier $flashy): Response
+    public function show(Request $request, FlashyNotifier $flashy, CourrierRepository $CourrierRepository): Response
    {
        try{
            $pdo=new PDO("mysql:host=localhost;dbname=stage2","root","");
@@ -69,6 +70,10 @@ class pageController extends AbstractController
            $em->flush();
            //mercuryflash
         $flashy->success('Courrier envoyé avec succès!');
+          
+
+
+
 
 
            $id_courrier = $courrier->getId();
@@ -99,6 +104,9 @@ class pageController extends AbstractController
        return $this->render('after_log/page.html.twig',[
            "form" => $form->createView(),
            "user" => $user,
+           "listeCourrier" => $CourrierRepository->findBy(array(),
+                                                          array('created_at' =>'desc'),
+                                                          4,0)
        ]);
 
     }
@@ -116,8 +124,15 @@ class pageController extends AbstractController
     /**
      * @Route("/send", name="send")
      */
-    public function send(Request $request, FlashyNotifier $flashy):Response
+    public function send(Request $request, FlashyNotifier $flashy, CourrierRepository $CourrierRepository):Response
     {
+        try{
+           $pdo=new PDO("mysql:host=localhost;dbname=stage2","root","");
+
+       }
+       catch(PDOException $e){
+           echo $e->getMessage();
+       }
         $courrier = new Courrier();
         $user = $this->getUser();
         $form = $this->createForm(CourrierType::class,$courrier);
@@ -145,6 +160,27 @@ class pageController extends AbstractController
 
             //mercuryflash
         $flashy->success('Courrier envoyé avec succès!');
+          $id_courrier = $courrier->getId();
+
+           //si le fichier existe
+           $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($UploadedFile->getPathname());
+           $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type );
+
+           $spreadsheet = $reader->load($UploadedFile->getPathname());
+           $data = $spreadsheet->getActiveSheet()->toArray();
+
+           foreach ($data as $row) {
+               $insert_data = array(
+                   ':nom' => $row[0],
+                   ':prenom' => $row[1],
+                   ':numero' => $row[2],
+                   ':courier_id' => $id_courrier,
+               );
+
+               $query = "INSERT INTO upload ( nom, prenom, numero, courier_id) VALUES ( :nom, :prenom, :numero, :courier_id)";
+               $statement = $pdo->prepare($query);
+               $statement->execute($insert_data);
+             }
 
             return $this->redirectToRoute("send");
         }
@@ -153,13 +189,25 @@ class pageController extends AbstractController
         return $this->render("courrier/send.html.twig",[
             "form" => $form->createView(),
             "user" => $user,
+            "listeCourrier" => $CourrierRepository->findBy(array(),
+                array('created_at' =>'desc'),
+                4,0)
         ]);
     }
     /**
      * @Route("/received", name="received")
      */
-    public function received(Request $request, FlashyNotifier $flashy): Response
+    public function received(Request $request, FlashyNotifier $flashy, CourrierRepository $CourrierRepository): Response
     {
+
+        try{
+           $pdo=new PDO("mysql:host=localhost;dbname=stage2","root","");
+
+       }
+       catch(PDOException $e){
+           echo $e->getMessage();
+       }
+
         $courrier = new Courrier();
        $user = $this->getUser();
        $form = $this->createForm(CourrierType::class,$courrier);
@@ -183,6 +231,27 @@ class pageController extends AbstractController
            $em =$this->getDoctrine()->getManager();
            $em->persist($courrier);
            $em->flush();
+             $id_courrier = $courrier->getId();
+
+           //si le fichier existe
+           $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($UploadedFile->getPathname());
+           $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type );
+
+           $spreadsheet = $reader->load($UploadedFile->getPathname());
+           $data = $spreadsheet->getActiveSheet()->toArray();
+
+           foreach ($data as $row) {
+               $insert_data = array(
+                   ':nom' => $row[0],
+                   ':prenom' => $row[1],
+                   ':numero' => $row[2],
+                   ':courier_id' => $id_courrier,
+               );
+
+               $query = "INSERT INTO upload ( nom, prenom, numero, courier_id) VALUES ( :nom, :prenom, :numero, :courier_id)";
+               $statement = $pdo->prepare($query);
+               $statement->execute($insert_data);
+             }
            //mercuryflash
         $flashy->success('Courrier envoyé avec succès!');
 
@@ -191,6 +260,9 @@ class pageController extends AbstractController
         return $this->render('courrier/received.html.twig',[
             "form" => $form->createView(),
              "user" => $user,
+            "listeCourrier" => $CourrierRepository->findBy(array(),    
+                array('created_at' =>'desc'),
+                4,0)
         ]);
     }
     /**

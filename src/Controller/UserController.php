@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\CourrierRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
-    public function index(UserRepository $userRepository): Response
+    public function index(UserRepository $userRepository,CourrierRepository $CourrierRepository): Response
     {
         //@ToDo get user connectd
         $user = $this->getUser();
@@ -27,7 +28,10 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', [
 
             'users' => $userRepository->findAll(),
-            'user'=> $user
+            'user'=> $user,
+            "listeCourrier" => $CourrierRepository->findBy(array(),
+                array('created_at' =>'desc'),
+                4,0)
 
         ]);
     }
@@ -35,7 +39,7 @@ class UserController extends AbstractController
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
-    public function new(Request $request,UserPasswordEncoderInterface $passwordEncoder): Response
+    public function new(Request $request,UserPasswordEncoderInterface $passwordEncoder,CourrierRepository $CourrierRepository): Response
     {
 
         $user = $this->getUser();
@@ -62,26 +66,32 @@ class UserController extends AbstractController
 
             'user' => $user,
             'form' => $form->createView(),
+            "listeCourrier" => $CourrierRepository->findBy(array(),
+                array('created_at' =>'desc'),
+                4,0)
+
         ]);
     }
 
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
      */
-    public function show(User $user): Response
+    public function show(User $user, CourrierRepository $CourrierRepository): Response
     {
         $user_co = $this->getUser();
 
         return $this->render('user/show.html.twig', [
             'user' => $user,
-            'user_co' => $user_co
+            'user_co' => $user_co, "listeCourrier" => $CourrierRepository->findBy(array(),
+                array('created_at' =>'desc'),
+                4,0)
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder,CourrierRepository $CourrierRepository): Response
     {
         $user_co = $this->getUser();
 
@@ -89,7 +99,16 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+             $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('Password')->getData()
+                )
+            );
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirectToRoute('user_index');
         }
@@ -98,6 +117,9 @@ class UserController extends AbstractController
             'user_co' => $user_co,
             'user' => $user,
             'form' => $form->createView(),
+            "listeCourrier" => $CourrierRepository->findBy(array(),
+                array('created_at' =>'desc'),
+                4,0)
         ]);
     }
 

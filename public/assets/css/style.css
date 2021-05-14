@@ -64,6 +64,8 @@ input:checked[type="checkbox"]:before
     margin:0;
     padding : 0;
     width:20rem;
+    border-radius: 12px;
+
 }
 .dropdown-header
 {
@@ -71,6 +73,7 @@ input:checked[type="checkbox"]:before
     border:1px solid #A2A0E1 ;
     color: #fff;
     margin-top: 0;
+    border-radius: 4px;
 }
 .rounded-circle
 {
@@ -101,3 +104,43 @@ input:checked[type="checkbox"]:before
   {
       margin-right:10px;
   }
+ /* .icon-button
+  {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width:50px;
+      height: 50px;
+      color: #333333;
+      background: #DDDDDD;
+      border: none;
+      border-radius: 50%;
+  }
+  .icon-button__badge
+  {
+      position: absolute;
+      top:-10px;
+      right:-10px;
+      width: 30px;
+      height: 30px;
+      background: red;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+  }*/
+.badge-notification
+{
+    position: absolute;
+    top:-1px;
+    right:-0.1em;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    background: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
