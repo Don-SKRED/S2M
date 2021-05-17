@@ -50,7 +50,7 @@
                                     {% for liste in listeCourrier %}
                                         {% if liste.recipient.id == user.id %}
 
-                                            <a href="#" class="d-flex hope" style="height:4rem;">
+                                            <a href="{{ path("excel", {id: liste.id}) }}" class="d-flex hope" style="height:4rem;">
                                                 <div class ="jo">
                                                     <img class="rounded-circle" src="{{ asset('assets/svg/abstract-user.svg') }}">
                                                 </div>

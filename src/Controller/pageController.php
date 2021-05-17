@@ -88,9 +88,10 @@ class pageController extends AbstractController
                    ':prenom' => $row[1],
                    ':numero' => $row[2],
                    ':courier_id' => $id_courrier,
+                   ':valide' => 1
                );
 
-               $query = "INSERT INTO upload ( nom, prenom, numero, courier_id) VALUES ( :nom, :prenom, :numero, :courier_id)";
+               $query = "INSERT INTO upload ( nom, prenom, numero, courier_id, valide) VALUES ( :nom, :prenom, :numero, :courier_id, :valide)";
                $statement = $pdo->prepare($query);
                $statement->execute($insert_data);
            }
@@ -172,9 +173,10 @@ class pageController extends AbstractController
                    ':prenom' => $row[1],
                    ':numero' => $row[2],
                    ':courier_id' => $id_courrier,
+                   ':valide' => 1
                );
 
-               $query = "INSERT INTO upload ( nom, prenom, numero, courier_id) VALUES ( :nom, :prenom, :numero, :courier_id)";
+               $query = "INSERT INTO upload ( nom, prenom, numero, courier_id, valide) VALUES ( :nom, :prenom, :numero, :courier_id, :valide)";
                $statement = $pdo->prepare($query);
                $statement->execute($insert_data);
              }
@@ -243,9 +245,10 @@ class pageController extends AbstractController
                    ':prenom' => $row[1],
                    ':numero' => $row[2],
                    ':courier_id' => $id_courrier,
+                   ':valide' => 1
                );
 
-               $query = "INSERT INTO upload ( nom, prenom, numero, courier_id) VALUES ( :nom, :prenom, :numero, :courier_id)";
+               $query = "INSERT INTO upload ( nom, prenom, numero, courier_id, valide) VALUES ( :nom, :prenom, :numero, :courier_id, :valide)";
                $statement = $pdo->prepare($query);
                $statement->execute($insert_data);
              }

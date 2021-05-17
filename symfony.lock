@@ -112,6 +112,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.2.0"
     },
+    "lcobucci/jwt": {
+        "version": "3.4.5"
+    },
     "maennchen/zipstream-php": {
         "version": "2.1.0"
     },
@@ -338,6 +341,21 @@
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
+    },
+    "symfony/mercure": {
+        "version": "v0.5.3"
+    },
+    "symfony/mercure-bundle": {
+        "version": "0.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "0.3",
+            "ref": "d1cdff3ae53bf6a5cbfb088c82f26032bdc14cc3"
+        },
+        "files": [
+            "./config/packages/mercure.yaml"
+        ]
     },
     "symfony/mime": {
         "version": "v5.2.6"

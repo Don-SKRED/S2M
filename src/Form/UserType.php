@@ -38,7 +38,8 @@ class UserType extends AbstractType
                   ],
                 ])
             ->add('Status',CheckboxType::class,
-                ['label' => 'Actif','required'=>false])
+                ['label' => 'Actif','required'=>false,
+                    'attr' => ['class' => 'form-control user_check']],)
             ->add('Password', RepeatedType::class, [
 
                 'type' => PasswordType::class,

@@ -108,4 +108,5 @@ class Upload
 
         return $this;
     }
+
 }
