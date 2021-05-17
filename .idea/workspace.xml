@@ -3,37 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e7f47f34-5228-4c17-97b6-cec99e2f4578" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-6098e9fd98efe.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-6098ea78f09ae.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-6098ef2ba109b.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-6098f0f5d9f2e.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-60991e5114245.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-6099249b3c11e.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-6099250430cf9.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-60992b354efcb.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-60993a084b0b8.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-60993a3a34a88.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609a194c82c71.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609a2b41cc308.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609a2b7bf2cee.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609a3b28e2340.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609b8047364c8.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609b8090235dc.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609b80f3e1a73.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609b8e97af3e4.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609bd35e8d3af.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/RecapCA-02-03-2021_au_04-03-2021-1617170880-6099185d29409.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/pageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/pageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/after_log/page.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/after_log/page.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Upload.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Upload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UploadType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UploadType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courrier/exShow.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/exShow.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/received.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/received.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/send.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/send.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,12 +183,12 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\projet-2\public\assets" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\projet-2\public\assets" />
       <recent name="C:\projet-2\templates\user" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\projet-2\public\assets" />
     </key>
   </component>
   <component name="RunManager">
@@ -295,7 +270,9 @@
       <workItem from="1620796430245" duration="12463000" />
       <workItem from="1620822716354" duration="3280000" />
       <workItem from="1620927092617" duration="4302000" />
-      <workItem from="1620974170835" duration="5386000" />
+      <workItem from="1620974170835" duration="7889000" />
+      <workItem from="1620999464277" duration="522000" />
+      <workItem from="1621073735105" duration="22679000" />
     </task>
     <servers />
   </component>
@@ -319,18 +296,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="269" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1620200577872" />
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1620979377554">
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1621086101480">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1620979377554" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1621086101480" />
     <state x="465" y="84" width="620" height="656" key="#projet-2" timestamp="1617342250255">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="465" y="84" width="620" height="656" key="#projet-2/0.0.1536.824@0.0.1536.824" timestamp="1617342250255" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1619374484516">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1621096539878">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1619374484516" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1621096539878" />
     <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620825888211">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -339,13 +316,24 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="144" y="52" width="1081" height="714" key="dock-window-1/0.0.1366.728@0.0.1366.728" timestamp="1619374284261" />
-    <state x="379" y="96" width="607" height="536" key="find.popup" timestamp="1620590505694">
+    <state x="379" y="96" width="607" height="536" key="find.popup" timestamp="1621175058218">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="96" width="607" height="536" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1620590505694" />
+    <state x="379" y="96" width="607" height="536" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1621175058218" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1620653777741">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1620653777741" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/templates/user/new.html.twig</url>
+          <line>3</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Section Courrier{% endblock %}
+{% block title %}Courrier envoyés{% endblock %}
 {% block navbar %}
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -139,7 +139,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for courrier in app.user.sent|reverse %}
+                    {% for courrier in app.user.sent %}
                     <tr>
 
                         <td>{{ courrier.recipient.Nom }}</td>

@@ -1,10 +1,12 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Upload;
 use App\Entity\User;
+
 use App\Repository\CourrierRepository;
 use App\Repository\UserRepository;
-use App\Entity\Upload;
+use App\Repository\UploadRepository;
 use App\Form\UploadType;
 use App\Entity\Courrier;
 use App\Form\CourrierType;
@@ -70,12 +72,7 @@ class pageController extends AbstractController
            $em->flush();
            //mercuryflash
         $flashy->success('Courrier envoyé avec succès!');
-          
-
-
-
-
-
+        
            $id_courrier = $courrier->getId();
 
            //si le fichier existe
@@ -260,16 +257,31 @@ class pageController extends AbstractController
         return $this->render('courrier/received.html.twig',[
             "form" => $form->createView(),
              "user" => $user,
-            "listeCourrier" => $CourrierRepository->findBy(array(),    
+            "listeCourrier" => $CourrierRepository->findBy(array(),
                 array('created_at' =>'desc'),
-                4,0)
+                4,0),
+
+
+            
         ]);
     }
     /**
      * @Route("/excel/{id}", name="excel",methods={"GET"})
      */
-    public function excel_show(Courrier $courrier): Response
+    public function excel_show(Request $request, Courrier $courrier, CourrierRepository $CourrierRepository, UploadRepository $uploadRepository): Response
     {
+
+        $user = $this->getUser();
+        $upload = new Upload();
+        $form = $this->createForm(UploadType::class,$upload);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($upload);
+            $em->flush();
+        }
+
+
         $user = $this->getUser();
         $file = $courrier ->getFichier();
         $path = $this->getParameter('upload_directory').'\\'.$file;
@@ -283,10 +295,13 @@ class pageController extends AbstractController
 
         $spreadsheet = $reader->load($info->getPathname());
         $writer = IOFactory::createWriter($spreadsheet, 'Html');
-        $message = $writer->save('php://output');
+        //$message = $writer->save('php://output');
 
 
-
+        $id_courrier = $courrier->getId();
+        $request = $uploadRepository->findBy(["id" => $id_courrier]);
+        //$ic_lo =  $CourrierRepository->findBy(["id" => $id_courrier]);
+        //var_dump($courri); die;
 
         $arrayDataExcel = $spreadsheet->getActiveSheet()->toArray();
         //dump($arrayDataExcel);die;
@@ -295,9 +310,11 @@ class pageController extends AbstractController
 
         return $this->render('courrier/exShow.html.twig',[
             "user" => $user,
-            //"file" => $file,
-            //"data" => $arrayDataExcel,
-            'data' => $message
+            "form" => $form->createView(),
+            "listeCourrier" => $CourrierRepository->findBy(array(),
+                array('created_at' =>'desc'),
+                4,0),
+            'upload' => $uploadRepository->findBy(["courier" => ["id" => $id_courrier]]),
         ]);
     }
 
@@ -331,6 +348,22 @@ class pageController extends AbstractController
         //dump($arrayDataExcel);die;
 
         //echo $message;
+        return new Response ("ok");
+    }
+
+    //ajax_validate_courier
+    /**
+     * @Route("/ajax-validate-courier", name="ajax_validate_courier",methods={"POST"})
+     */
+    public function ajax_validate_courier(Request $request, UploadRepository $uploadRepository): Response
+    {
+        $id = $request->request->get('id'); // recuperation de données envoyer par POST
+        $upload = $uploadRepository->find($id);
+        $upload->setValide(!$upload->getValide());
+        $em =$this->getDoctrine()->getManager();
+        $em->persist($upload);
+        $em->flush();
+
         return new Response ("ok");
     }
 

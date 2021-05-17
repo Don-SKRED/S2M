@@ -38,6 +38,11 @@ class Upload
      */
     private $courier;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $valide;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,6 +93,18 @@ class Upload
     public function setCourier(?Courrier $courier): self
     {
         $this->courier = $courier;
+
+        return $this;
+    }
+
+    public function getValide(): ?bool
+    {
+        return $this->valide;
+    }
+
+    public function setValide(bool $valide): self
+    {
+        $this->valide = $valide;
 
         return $this;
     }
