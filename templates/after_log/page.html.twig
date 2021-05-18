@@ -48,38 +48,56 @@
             <li class="nav-item dropdown">
                 <a  class="nav-link" href="#" id="receivedDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="{{ asset('assets/svg/envelope.svg') }}" style="height:30px;">
+                    {# Debut de la gestion de la notification#}
+                    {% set i = 0 %}
+                    {% for liste in listeCourrier %}
+                        {% if liste.recipient.id == user.id %}
+                            {% if liste.isRead == 0  %}
+                                {% set i = i + 1 %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if i == 0 %}
+                    <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter d-none ">  {{ i }}</span>
+                        {% else %}
+                            <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter ">  {{ i }}</span>
+                        {% endif %}
+                    {# fin #}
 
-                    <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter">
-                          {{ app.user.received|length }}
-
-
-
-                    </span> </a>
+                    </a>
                 <div class="dropdown-menu dropdown-menu-right drop" aria-labelledby="receivedDropdown">
                     <h6 class="dropdown-header text-center" >CENTRE COURRIER</h6>
                              {% if app.user.received|length == 0 %}
                                 <p class="text-center"> Aucun courrier reçus </p>
 
                                 {% else %}
-                      {% for liste in listeCourrier %}
-                          {% if liste.recipient.id == user.id %}
-        
-                                <a href="{{ path("excel", {id: liste.id}) }}" class="d-flex hope" style="height:4rem;">
-                                    <div class ="jo">
-                                        <img class="rounded-circle" src="{{ asset('assets/svg/abstract-user.svg') }}">
-                                    </div>
-                                    <div style="display:block;">
-                                        <div class="text" style="color:black;">
-                                            {{ liste.nomC }}
-                                        </div>
-                                        <div style="color:#b7b9cc;" class="text-truncate">
-                                            {{ liste.sender.nom}} , {{ liste.status}}
-                                        </div>
 
-                                    </div>
-                                </a>
-                          {% endif %}
-                            {% endfor %}
+                    {% for liste in listeCourrier %}
+                                        {% if liste.recipient.id == user.id %}
+                                                {% set bold = "" %}
+                                                {% if liste.isRead == 0  %}
+                                                    {% set bold ="font-weight-bold" %}
+
+                                                {% endif %}
+
+
+                                            <a href="{{ path("excel", {id: liste.id}) }}" class="d-flex hope {{bold}}" style="height:4rem;">
+                                                <div class ="jo">
+                                                    <img class="rounded-circle" src="{{ asset('assets/svg/abstract-user.svg') }}">
+                                                </div>
+                                                <div style="display:block;">
+                                                    <div class="text " style="color:black;">
+                                                        {{ liste.nomC }}
+                                                    </div>
+                                                    <div style="color:#b7b9cc;" class="text-truncate">
+                                                        {{ liste.sender.nom}} , {{ liste.status}}
+                                                    </div>
+
+                                                </div>
+                                            </a>
+                                        {% endif %}
+                                    {% endfor %}
+
                              {% endif %}
 
 
@@ -215,9 +233,6 @@
                                                             {{ form_widget(form.fichier)}}
                                                         </div>
                                                         <div class="form-group">
-                                                            {% set var = user.nom  %}
-                                                            {{ user.nom }}
-
                                                             {{ form_label(form.recipient)}}
                                                             {{ form_widget(form.recipient)}}
                                                         </div>

@@ -273,47 +273,21 @@ class pageController extends AbstractController
      */
     public function excel_show(Request $request, Courrier $courrier, CourrierRepository $CourrierRepository, UploadRepository $uploadRepository): Response
     {
+        // est lue ou non
+       
+        $courrier->setIsRead(true);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($courrier);
+        $em->flush();
+        
 
-        $user = $this->getUser();
         $upload = new Upload();
-        $form = $this->createForm(UploadType::class,$upload);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($upload);
-            $em->flush();
-        }
-
-
         $user = $this->getUser();
-        $file = $courrier ->getFichier();
-        $path = $this->getParameter('upload_directory').'\\'.$file;
-        $info = new \SplFileInfo($path);
-
-       // $fileSystem = new Filesystem();
-        //$fileSystem->chmod($info->getPath(),7777);
-
-        $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($info->getPathname());
-        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type );
-
-        $spreadsheet = $reader->load($info->getPathname());
-        $writer = IOFactory::createWriter($spreadsheet, 'Html');
-        //$message = $writer->save('php://output');
-
-
         $id_courrier = $courrier->getId();
         $request = $uploadRepository->findBy(["id" => $id_courrier]);
-        //$ic_lo =  $CourrierRepository->findBy(["id" => $id_courrier]);
-        //var_dump($courri); die;
-
-        $arrayDataExcel = $spreadsheet->getActiveSheet()->toArray();
-        //dump($arrayDataExcel);die;
-
-        //echo $message;
 
         return $this->render('courrier/exShow.html.twig',[
             "user" => $user,
-            "form" => $form->createView(),
             "listeCourrier" => $CourrierRepository->findBy(array(),
                 array('created_at' =>'desc'),
                 4,0),
@@ -321,38 +295,7 @@ class pageController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/ajax-excel", name="ajax_excel",methods={"POST"})
-     */
-    public function ajax_excel_show(Request $request): Response
-    {
-        $id = $request->request->get('id');
-
-        $user = $this->getUser();
-        $CourrierRepository = CourrierRepository::find($id); //@Todo
-        dump($CourrierRepository);die;
-        $file = $courrier ->getFichier(); // @ToDo requette pour obtenir le courier
-        $path = $this->getParameter('upload_directory').'\\'.$file;
-        $info = new \SplFileInfo($path);
-
-        //$fileSystem = new Filesystem();
-        //$fileSystem->chmod($info->getPath(),7777);
-
-        $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($info->getPathname());
-        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type );
-
-        $spreadsheet = $reader->load($info->getPathname());
-        $writer = IOFactory::createWriter($spreadsheet, 'Html');
-        $message = $writer->save('php://output');
-        // $message = $writer->save($info->getPathname());
-
-
-        $arrayDataExcel = $spreadsheet->getActiveSheet()->toArray();
-        //dump($arrayDataExcel);die;
-
-        //echo $message;
-        return new Response ("ok");
-    }
+  
 
     //ajax_validate_courier
     /**

@@ -2,31 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7f47f34-5228-4c17-97b6-cec99e2f4578" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/projet-2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/projet-2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur1-609e2d9998bfc.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur1-609e2df2c50a8.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur1-609e2e27be643.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur1-609e7318a4a33.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur1-609fadd6adf18.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur1-609fae51d645a.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur1-609fae8539f9c.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur1-609faeb7b0fe5.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur1-609faef39119d.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609d124dac1ae.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609d12b669b96.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/Classeur2-609d1478eca0e.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/Courrier/RecapCA-02-03-2021_au_04-03-2021-1617171269-609d13365cfe6.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/pageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/pageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Upload.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Upload.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/after_log/page.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/after_log/page.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/exShow.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/exShow.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/received.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/received.html.twig" afterDir="false" />
@@ -302,7 +279,8 @@
       <workItem from="1620974170835" duration="7889000" />
       <workItem from="1620999464277" duration="522000" />
       <workItem from="1621073735105" duration="22679000" />
-      <workItem from="1621230371488" duration="5355000" />
+      <workItem from="1621230371488" duration="8563000" />
+      <workItem from="1621274160470" duration="2643000" />
     </task>
     <servers />
   </component>
@@ -338,10 +316,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1621096539878" />
-    <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1620825888211">
+    <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1621275169463">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1620825888211" />
+    <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1621275169463" />
     <state x="144" y="52" width="1081" height="714" key="dock-window-1" timestamp="1619374284261">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
