@@ -99,12 +99,13 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-             $user->setPassword(
+            /* $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
                     $form->get('Password')->getData()
                 )
-            );
+            );*/
+           // $user->setPassword($form->get('Password')->getData());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

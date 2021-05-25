@@ -43,9 +43,9 @@ class UserType extends AbstractType
             ->add('Password', RepeatedType::class, [
 
                 'type' => PasswordType::class,
-                'invalid_message' => 'The password fields must match.',
+                'invalid_message' => 'les mots de passes doivent correspondre',
                'options' => ['attr' => ['class' => 'form-control',]],
-              //  'required' => true,
+               'required' => false,
                 'first_options'  => ['label' => 'Mot de passe:'],
                 'second_options' => ['label' => 'Confirmer mot de passe:'],
                 'mapped' => false,

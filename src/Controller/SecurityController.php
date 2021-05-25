@@ -21,7 +21,7 @@ class SecurityController extends AbstractController
        return new Response ("Vous êtes connecté");  
    }
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/", name="app_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {

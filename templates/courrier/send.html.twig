@@ -62,7 +62,7 @@
                                                 {% if liste.isRead == 0 %}
                                                     {% set bold ="font-weight-bold" %}
                                                 {% endif %}
-                                            <a href="{{ path("excel", {id: liste.id}) }}" class="d-flex hope {{bold}}" style="height:4rem;">
+                                            <a href="{{ path("excel", {id: liste.id}) }}" class="d-flex hope {{bold}}" style="height:5.3rem;">
                                                 <div class ="jo">
                                                     <img class="rounded-circle" src="{{ asset('assets/svg/abstract-user.svg') }}">
                                                 </div>
@@ -166,7 +166,7 @@
                                 <span style="padding: 7px; border-radius: 50px;"> {{ courrier.status }} </span>
                             {% endif %}
                         <td>{{ courrier.fichier }}</td>
-                        <td>{{ courrier.createdAt|date("d/m/Y")}}</td>
+                        <td>{{ courrier.createdAt|date}}</td>
 
                     </tr>
                     {% else %}

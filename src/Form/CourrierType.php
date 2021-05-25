@@ -21,18 +21,21 @@ class CourrierType extends AbstractType
     {
         $builder
             ->add('nom_c',TextType::class,[
+                'required' => false,
                 'label' => 'Nom du courrier',
                 "attr" => [
                     "class" => "form-control"
                 ]
             ])
             ->add('notes', TextareaType::class,[
+
                 "attr" => [
                     "class" => "form-control"
                 ]
             ])
 
             ->add('status',ChoiceType::class,[
+                'required' => false, //essayer de mettre required false sur twig ou form du controller
                 "choices" =>[
                     'Très urgent' => 'TRES URGENT',
                     'Urgent' => 'URGENT',
@@ -43,6 +46,7 @@ class CourrierType extends AbstractType
                 ]
             ])
             ->add('fichier',FileType::class,[
+                'required' => false,
                 'label' => 'choississez votre fichier',
                 "attr" => [
                     "class" => "form-control",
@@ -80,6 +84,7 @@ class CourrierType extends AbstractType
 
 
             ->add('recipient',EntityType::class,[
+                'required' => false,
                 "class" => User::class,
                 'label' => 'Destinataire',
                 "choice_label" => "Nom",

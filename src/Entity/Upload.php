@@ -43,6 +43,11 @@ class Upload
      */
     private $valide;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isDisabled;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +111,23 @@ class Upload
     {
         $this->valide = $valide;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsDisabled(): ?bool
+    {
+        return $this->isDisabled;
+    }
+
+    /**
+     * @param mixed $isDisabled
+     */
+    public function setIsDisabled(bool $isDisabled): self
+    {
+        $this->isDisabled = $isDisabled;
         return $this;
     }
 

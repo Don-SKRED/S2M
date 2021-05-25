@@ -63,7 +63,7 @@
                                                 {% if liste.isRead == 0 %}
                                                     {% set bold ="font-weight-bold" %}
                                                 {% endif %}
-                                            <a href="{{ path("excel", {id: liste.id}) }}" class="d-flex hope {{bold}}" style="height:4rem;">
+                                            <a href="{{ path("excel", {id: liste.id}) }}" class="d-flex hope {{bold}}" style="height:5.3rem;">
                                                 <div class ="jo">
                                                     <img class="rounded-circle" src="{{ asset('assets/svg/abstract-user.svg') }}">
                                                 </div>
@@ -134,6 +134,8 @@
             <th>Valide</th>
         </tr>
         <tbody>
+               {% set nbre_pieces = upload|length %}
+        {% set nbre_pieces_check = 0 %}
         {% for piece in upload %}
             <tr>
                 <td>{{ piece.courier.nomC }} </td>
@@ -141,8 +143,11 @@
                 <td> {{ piece.prenom }} </td>
                 <td> {{ piece.numero }} </td>
                 {% set isChecked = piece.valide != 0 ? 'checked' : ''  %}
-                <td> <input type="checkbox" {{ isChecked }} class="form-control" onchange="setValidate({{ piece.id }})">
-
+                {% set isDisabled = piece.isDisabled != 0 ? 'disabled' : ''  %}
+                <td> <input type="checkbox" {{ isChecked }} class="form-control boxcheck" data-id="{{ piece.id }}" onchange="setValidate({{ piece.id }})" {{ isDisabled }}>
+                 {% if piece.valide == 1 %}
+                        {% set nbre_pieces_check = nbre_pieces_check + 1 %}
+                    {% endif %}
                 </td>
 
             </tr>
@@ -152,24 +157,113 @@
         </tbody>
 
     </table>
-    <a class="btn btn-success" href="{{ path('received') }}"> OK </a>
+    {% set valid = (nbre_pieces == nbre_pieces_check) ? '' : 'd-none'  %}
+
+    <button class="btn btn-success {{ valid }}"  id="btn-validate" onclick="confirm()"> validation</button>
+
+    {#-------------------- notes de retour------------------------#}
+
+
+  {{ form_start(form) }}
+    <div>
+      {{ form_label(form.notes) }}
+      {{ form_widget(form.notes) }}
+  </div>
+    <div class="d-none">
+      {{ form_label(form.nom_c) }}
+      {{ form_widget(form.nom_c) }}
+  </div>
+    <div class="d-none">
+      {{ form_label(form.status) }}
+      {{ form_widget(form.status) }}
+  </div>
+    <div class="d-none">
+      {{ form_label(form.recipient) }}
+      {{ form_widget(form.recipient) }}
+  </div>
+    <div class="d-none">
+      {{ form_label(form.fichier) }}
+      {{ form_widget(form.fichier) }}
+  </div>
+
+    {{ form_widget(form.envoyer) }}
+    {{ form_end(form) }}
+
+
+
+
+
+    {#-------------------- fin notes de retour------------------------#}
+
+
+
+
+
+
 
     <script>
-        // ajax modification de la valeur de la colone validate
-        function setValidate(id){
+
+        //$('.boxcheck').removeAttr('disabled');
+            var nbPiece = {{ nbre_pieces }}
+            var nbChecked = {{ nbre_pieces_check }};
+            // ajax modification de la valeur de la colone validate
+            function setValidate(id){
+                $.ajax({
+                    url : '{{ path('ajax_validate_courier') }}' ,
+                    method : 'POST',
+                    data : {id : id },// @ToDo recuperer id
+                    success : function (data) {
+                        if(data){
+                            nbChecked++;
+                        } else {
+                            nbChecked--;
+                        }
+
+                        if (nbChecked == nbPiece){
+                            // display
+                            $('#btn-validate').removeClass('d-none')
+
+                        } else {
+                            //display none
+                            $('#btn-validate').addClass('d-none')
+                        }
+
+                    }
+
+                });
+            }
+
+        function setDisabled(arrayIds){
             $.ajax({
-                url : '{{ path('ajax_validate_courier') }}' ,
+                url : '{{ path('ajax_disabled_courier') }}' ,
                 method : 'POST',
-                data : {id : id },// @ToDo recuperer id
+                data : {ids : arrayIds },// @ToDo recuperer id
                 success : function (data) {
-                    //alert ('reussit')
+                    //debut reception php->twg
+                    //var response = JSON.parse(data);
+                   // console.log($response);
+                    // fin
+                    $('.boxcheck').attr("disabled","disabled");
+                    $('.btn-validate').attr("disabled","disabled");
+
                 }
 
             });
         }
-        $(document).ready(function () {
+            function confirm()
+            {
+                //$('.boxcheck').attr("disabled","disabled");
+                var checkboxes = $('.boxcheck');
+                var arrayIds = [];
+                $.each(checkboxes , function (index,value) {
+                    arrayIds.push($(this).data('id'))
+                });
 
-        })
+                console.log(arrayIds)
+                setDisabled(arrayIds);
+                //alert(disabled);
+            }
+
 
     </script>
 
