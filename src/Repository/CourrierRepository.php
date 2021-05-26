@@ -22,19 +22,28 @@ class CourrierRepository extends ServiceEntityRepository
     // /**
     //  * @return Courrier[] Returns an array of Courrier objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findByExampleField($nom_recipient)
     {
-        return $this->createQueryBuilder('c')
+       /* return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')
             ->setParameter('val', $value)
             ->orderBy('c.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-        ;
+        ;*/
+            $qb = $this->createQueryBuilder('c')
+            ->where('c.recipient != :recipient')
+            ->setParameter('recipient', $nom_recipient)
+            ->orderBy('c.recipient', 'ASC');
+        $query = $qb->getQuery();
+
+        return $query->getResult();
     }
-    */
+    
+
+
 
     /*
     public function findOneBySomeField($value): ?Courrier

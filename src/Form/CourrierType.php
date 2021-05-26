@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Courrier;
+use App\Repository\CourrierRepository;
+use App\Repository\UserRepository;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -90,8 +92,21 @@ class CourrierType extends AbstractType
                 "choice_label" => "Nom",
                 "attr" => [
                     "class" => "form-control"
-                ]
-            ])
+                ]])
+              /*  "choice_filter" => function( $user =  $this->getUser()){
+
+                     $l_destinataires = $entityManager->getRepository(User::class)->findOtherUser($user);
+                     return $l_destinataires;
+                }*/
+               /* 'query_builder' => function(CourrierRepository $cr) {
+                     $user = $this->getUser();
+                  return  $er->createQueryBuilder('c')
+                 ->where('c.recipient != :recipient')
+                 ->setParameter('recipient',  $user)
+                ->orderBy('c.recipient', 'ASC');
+          
+                }*/
+            
             ->add ('envoyer', SubmitType::class,[
                 "attr" => [
                     "class" => "btn btn-outline-warning waves-effect\""

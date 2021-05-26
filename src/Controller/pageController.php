@@ -37,7 +37,7 @@ class pageController extends AbstractController
     /**
      * @Route("/home/{id}", name="page_index", methods={"GET","POST"})
      */
-    public function show(Request $request, FlashyNotifier $flashy, CourrierRepository $CourrierRepository): Response
+    public function show(User $user,Request $request, FlashyNotifier $flashy, CourrierRepository $CourrierRepository, UserRepository $UserRepository): Response
    {
        try{
            $pdo=new PDO("mysql:host=localhost;dbname=stage2","root","");
@@ -46,8 +46,22 @@ class pageController extends AbstractController
        catch(PDOException $e){
            echo $e->getMessage();
        }
-       /*
-*/
+    
+
+     /*  $user =  $this->getUser();
+       $entityManager = $this->getDoctrine()->getManager();
+       // $l_destinataires = $entityManager->getRepository(User::class)->findOtherUser($id);
+
+        $l2 = $entityManager->getRepository(Courrier::class)->findByExampleField($user);
+       /*$l_destinataire = $this->getDoctrine()
+                              ->getManager()
+                              ->getRepository(User::class)
+                             // ->findUser($user);
+                              ->findAll();
+       dump($l2);die;
+       dump($var);
+       */
+      
        $courrier = new Courrier();
        $user = $this->getUser();
        $form = $this->createForm(CourrierType::class,$courrier);
