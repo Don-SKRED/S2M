@@ -2,13 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7f47f34-5228-4c17-97b6-cec99e2f4578" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CourrierController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UploadController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/pageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/pageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Piece.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CourrierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CourrierType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CourrierRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CourrierRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/PieceRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/serviceExcel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/after_log/page.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/after_log/page.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courrier/exShow.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/exShow.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courrier/index.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courrier/received.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/received.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/courrier/send.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/send.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/upload/index.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,6 +298,7 @@
       <workItem from="1621857962288" duration="13094000" />
       <workItem from="1621920548392" duration="8509000" />
       <workItem from="1621965093513" duration="1170000" />
+      <workItem from="1622030077878" duration="6883000" />
     </task>
     <servers />
   </component>
@@ -314,10 +330,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="465" y="84" width="620" height="656" key="#projet-2/0.0.1536.824@0.0.1536.824" timestamp="1617342250255" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1621096539878">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1622030207431">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1621096539878" />
+    <state width="498" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1622030207431" />
     <state x="492" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1621275169463">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -334,16 +350,5 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1620653777741" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/templates/user/new.html.twig</url>
-          <line>3</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

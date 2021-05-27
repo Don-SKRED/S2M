@@ -35,13 +35,11 @@ class UserController extends AbstractController
 
         ]);
     }
-
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
     public function new(Request $request,UserPasswordEncoderInterface $passwordEncoder,CourrierRepository $CourrierRepository): Response
     {
-
         $user = $this->getUser();
         $userNew = new User();
         $form = $this->createForm(UserType::class, $userNew);
@@ -61,7 +59,6 @@ class UserController extends AbstractController
 
             return $this->redirectToRoute('user_index');
         }
-
         return $this->render('user/new.html.twig', [
 
             'user' => $user,
@@ -72,7 +69,6 @@ class UserController extends AbstractController
 
         ]);
     }
-
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
      */
@@ -87,7 +83,6 @@ class UserController extends AbstractController
                 4,0)
         ]);
     }
-
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
@@ -97,7 +92,6 @@ class UserController extends AbstractController
 
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             /* $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -106,7 +100,6 @@ class UserController extends AbstractController
                 )
             );*/
            // $user->setPassword($form->get('Password')->getData());
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -134,7 +127,6 @@ class UserController extends AbstractController
             $entityManager->remove($user);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('user_index');
     }
 }
