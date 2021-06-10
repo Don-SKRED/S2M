@@ -29,9 +29,9 @@ class UserController extends AbstractController
 
             'users' => $userRepository->findAll(),
             'user'=> $user,
-            "listeCourrier" => $CourrierRepository->findBy(array(),
+            "listeCourrier" => $CourrierRepository->findBy(array('is_verify' => 'true'),
                 array('created_at' =>'desc'),
-                4,0)
+                4,0),
 
         ]);
     }
@@ -63,9 +63,9 @@ class UserController extends AbstractController
 
             'user' => $user,
             'form' => $form->createView(),
-            "listeCourrier" => $CourrierRepository->findBy(array(),
+            "listeCourrier" => $CourrierRepository->findBy(array('is_verify' => 'true'),
                 array('created_at' =>'desc'),
-                4,0)
+                4,0),
 
         ]);
     }
@@ -78,9 +78,10 @@ class UserController extends AbstractController
 
         return $this->render('user/show.html.twig', [
             'user' => $user,
-            'user_co' => $user_co, "listeCourrier" => $CourrierRepository->findBy(array(),
+            'user_co' => $user_co,
+            "listeCourrier" => $CourrierRepository->findBy(array('is_verify' => 'true'),
                 array('created_at' =>'desc'),
-                4,0)
+                4,0),
         ]);
     }
     /**
@@ -111,9 +112,9 @@ class UserController extends AbstractController
             'user_co' => $user_co,
             'user' => $user,
             'form' => $form->createView(),
-            "listeCourrier" => $CourrierRepository->findBy(array(),
+            "listeCourrier" => $CourrierRepository->findBy(array('is_verify' => 'true'),
                 array('created_at' =>'desc'),
-                4,0)
+                4,0),
         ]);
     }
 

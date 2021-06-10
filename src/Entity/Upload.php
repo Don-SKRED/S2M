@@ -48,6 +48,17 @@ class Upload
      */
     private $isDisabled;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $n_bl;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $second_valide;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -131,4 +142,27 @@ class Upload
         return $this;
     }
 
+    public function getNBl(): ?string
+    {
+        return $this->n_bl;
+    }
+
+    public function setNBl(string $n_bl): self
+    {
+        $this->n_bl = $n_bl;
+
+        return $this;
+    }
+
+    public function getSecondValide(): ?bool
+    {
+        return $this->second_valide;
+    }
+
+    public function setSecondValide(bool $second_valide): self
+    {
+        $this->second_valide = $second_valide;
+
+        return $this;
+    }
 }

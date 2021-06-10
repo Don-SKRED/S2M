@@ -63,11 +63,14 @@ class Courrier
      */
     private $fichier;
 
-
-
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_verify;
 
     public function __construct()
     {
+        $this->is_verify = false;
         $this->created_at = new \DateTime();
         $this->libelles = new ArrayCollection();
     }
@@ -169,6 +172,18 @@ class Courrier
     public function setFichier($fichier)
     {
         $this->fichier = $fichier;
+
+        return $this;
+    }
+
+    public function getIsVerify(): ?bool
+    {
+        return $this->is_verify;
+    }
+
+    public function setIsVerify(bool $is_verify): self
+    {
+        $this->is_verify = $is_verify;
 
         return $this;
     }

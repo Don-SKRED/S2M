@@ -1,0 +1,325 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} verification{% endblock %}
+{% block navbar %}
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{ path('page_index', {id: user.id}) }}"><h2>ACCUEIL</h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <li class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        {#<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>#}
+                    </li>
+                </ul>
+            </li>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a  class="nav-link" href="#" id="receivedDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ asset('assets/svg/envelope.svg') }}" style="height:30px;">
+                        {# Debut de la gestion de la notification#}
+                        {% set i = 0 %}
+                        {% for liste in listeCourrier %}
+                            {% if liste.recipient.id == user.id %}
+                                {% if liste.isRead == 0  %}
+                                    {% set i = i + 1 %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if i == 0 %}
+                            <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter d-none ">  {{ i }}</span>
+                        {% else %}
+                            <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter ">  {{ i }}</span>
+                        {% endif %}
+                        {# fin #}
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right drop" aria-labelledby="receivedDropdown">
+                        <h6 class="dropdown-header text-center" >CENTRE COURRIER</h6>
+                        {% if app.user.received|length == 0 %}
+                            <p class="text-center"> Aucun courrier reçus </p>
+                        {% else %}
+                            {% for liste in listeCourrier %}
+                                {% if liste.recipient.id == user.id %}
+                                    {% set bold = "" %}
+                                    {% if liste.isRead == 0  %}
+                                        {% set bold ="font-weight-bold" %}
+                                    {% endif %}
+                                    <a href="{{ path("excel", {id: liste.id}) }}" class="d-flex hope {{bold}}" style="height:5.3rem;">
+                                        <div class ="jo">
+                                            <img class="rounded-circle" src="{{ asset('assets/svg/abstract-user.svg') }}">
+                                        </div>
+                                        <div style="display:block;">
+                                            <div class="text " style="color:black;">
+                                                {{ liste.nomC }}
+                                            </div>
+                                            <div style="color:#b7b9cc;" class="text-truncate">
+                                                {{ liste.sender.nom}} , {{ liste.status}}
+                                            </div>
+                                        </div>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+
+                        <a class="dropdown-item text-center" href="{{ path('received') }}">Voir tous les courriers</a>
+                    </div>
+
+                    </a>
+                </li>
+            </ul>
+
+            {# acces de la liste uniquement au utilisateur ayant le role admin #}
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="nav-link" href="{{ path('user_index') }}">Liste d'utilisateur</a>
+                    {% endif %}
+                </li>
+            </ul>
+            {#fin#}
+
+            <ul class="navbar-nav">
+                <div class="dropdown">
+                    <li class="nav-item">
+                        <img src ="{{asset('assets/svg/4.png')}}" class="img-profile rounded-circle dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <span class="dropdown-item"></span>
+                            <div class="d-flex">
+                                <img src ="{{asset('assets/svg/ip-address.svg')}}" style="height:25px;width:25px;">
+                                <h5 style="margin-left:4px;">  {{ user.IP }}</h5>
+                            </div>
+                            <div  class="d-flex text-center" style="margin-top:5px;">
+                                <img src ="{{asset('assets/svg/profile_icon.png')}}" style="height:25px;width:25px;">
+                                <h5 style="margin-left:4px;">  {{ user.Nom }}</h5>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="d-flex">
+                                <img src ="{{asset('assets/svg/logout.svg')}}">
+                                <a class="dropdown-item" style="padding-left:2px;" href="{{ path('app_logout') }}">Déconnexion</a>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+
+        </nav>
+    </header>
+{% endblock %}
+      {% block body %}
+
+
+          <h3 class="text-center font-weight-bold"> verification des pieces</h3>
+          <fieldset class="border" style="width:400px; height:auto;" >
+              <legend class="w-auto font-weight-bold ">Notes sur ce courrier </legend>
+              {{ courrier.notes }}
+          </fieldset>
+
+          <table style="margin: 50px;" class="table table-striped table-bordered table_data">
+              <thead></thead>
+              <tr>
+                  <th>  checkage </th>
+                  <th>Nom du courrier</th>
+                  <th> N° BL </th>
+                  <th>nom</th>
+                  <th>prenom</th>
+                  <th>numero</th>
+                  <th>Valide</th>
+                  {# <th>Entrée</th> #}
+              </tr>
+              <tbody>
+
+              {#si on ne met pas dans la base mais seulement de l'affichage #}
+          {#  {% for piece in data %}
+                {{ dump(piece) }}
+                  <tr class="ligne_depart">
+                      <td>  <input type="checkbox" name="select"></td>
+
+                      <td class="nom_courrier"> {{ courrier.nomC }}</td>
+                      <td class="col_NBL"> <input type="text" class="form-control inp_nbl"> </td>
+                      {%  for p in piece %}
+                          {{ dump(p) }}
+                          <td>{{ p }}</td>
+
+                      {% endfor %}
+                      <td class="col_checkbox"> <input type="checkbox" class="form-control boxcheck" data-id="" ></td>
+
+                      {# <td>
+                           <input type="text" class="form-control">
+                       </td>
+                       #}
+
+              {% for piece in upload %}
+                  <tr class="ligne_depart" data-id="{{ piece.id }}">
+                      <td>  <input type="checkbox" class="del" name="select" data-ident="{{ piece.id }}"> </td>
+                      <td>{{ piece.courier.nomC }} </td>
+                      <td class="col_NBL"> <input type="text" class="form-control inp_nbl"> </td>
+                      <td>{{ piece.nom }}</td>
+                      <td> {{ piece.prenom }} </td>
+                      <td> {{ piece.numero }} </td>
+
+                      <td class="col_checkbox"> <input type="checkbox" class="form-control boxcheck" data-id="{{ piece.id }}" ></td>
+
+
+                      {# <td>
+                           <input type="text" class="form-control">
+                       </td>
+                       #}
+
+                  </tr>
+
+
+
+              {% endfor %}
+              </tbody>
+          </table>
+
+          <button class="btn btn-primary add" onclick="ajoutLigne()"> Ajouter </button>
+          <button class="btn btn-danger del" onclick="delLigne()"> supprimer </button>
+          {#  buton enregistrer pour enregistrer les nouvelles valeurs#}
+          <a href="{{ path('second_verification',{id: courrier.id}) }}" class="btn btn-dark" onclick="Save()"> Enregistrer</a>
+
+
+          <script>
+
+              //Ajout de ligne
+              function ajoutLigne()
+              {
+
+                  var contenu = '{{ courrier.nomC }}'
+                  var ligne="<tr class='ligne'><td><input type='checkbox'  name='select' ></td><td>"+contenu+"</td><td><input type='text' class='form-control NBL'  ></td> <td><input type='text' class='form-control nom' name='' ></td> <td><input type='text' name='' class='form-control prenom'></td> <td><input type='text' name='' class='form-control numero'></td> <td><input type='checkbox'  class='form-control box' name='' ></td>";
+                  $(".table_data > tbody:last").append(ligne);
+              }
+              //suppression de ligne
+              function delLigne()
+              {
+                  var tad = [];
+                 $(".table_data").find('input[class ="del"]').each(function(){
+
+                     if($(this).is(":checked")) {
+                         var cheks = $(this).is(":checked");
+                         var idd = $(this).data("ident");
+                         var ldi = {
+                             'check': cheks,
+                             'id_d': idd,
+                         }
+                         $(this).parents("table.table_data tr").remove();
+                         tad.push(ldi);
+                     }
+
+
+                 })
+                     console.log(tad);
+                    $.ajax({
+                         url:'{{ path('ajax_delete_line') }}',
+                         method:'POST',
+                         data:{tad: tad},
+                         success:function(){
+                             alert('le contenu est supprimer');
+                         }
+
+                     })
+
+
+
+
+              }
+              //methode pour enregistrer en BD les ajouts et les NBL entrée et le checkbox checker
+              function Save()
+              {
+                  //colonne NBL
+                  var id = {{ courrier.id }}
+                  var tab_D = []; //tableau contenant les NBL et si la ligne est valide(checked)
+                 $('.ligne_depart').each(function(index,value)
+                  {
+                      var el_NBL = value.getElementsByClassName('inp_nbl');
+                      var nbl_d = $(el_NBL).val();
+                      var el_checkbox = value.getElementsByClassName('boxcheck');
+                      var chek = $(el_checkbox).is(":checked");
+
+                    /*  if (chek_del)
+                      {
+                          var id_ligne_suppr = $(this). data("ident");//recuperation de la ligne à supprimer
+                      }*/
+                      var id_ligne =  $(this). data("id");
+
+                      var ld = {
+                          'N° BL_D': nbl_d,
+                          'check_D': chek,
+                          'id_l': id_ligne,
+                          'id_ld': chek,
+                      }
+                    tab_D.push(ld);
+                  })
+                  console.log('tableau de depart :');
+                  console.log(tab_D);
+
+                  //script pour la suppression de ligne
+
+
+
+
+
+
+                  //script pour l'ajout de ligne
+                  var tab_lignes = [];
+                  $.each($('.ligne') , function (index,value) {
+
+                      var el_nbl = value.getElementsByClassName('NBL')
+                      var nbl = $(el_nbl).val();
+                      var el_nom = value.getElementsByClassName('nom')
+                      var nom = $(el_nom).val();
+                      var el_prenom = value.getElementsByClassName('prenom')
+                      var prenom = $(el_prenom).val();
+                      var el_numero = value.getElementsByClassName('numero')
+                      var numero = $(el_numero).val();
+                      var el_boxcheck = value.getElementsByClassName('box')
+                      var boxcheck = $(el_boxcheck).is(":checked");
+
+                      var ligne = {
+
+                          'N_BL' : nbl,
+                          'nom' : nom,
+                          'prenom' : prenom,
+                          'numero' : numero,
+                          'boxcheck' : boxcheck,
+                      }
+                      tab_lignes.push(ligne);
+                  });
+                  console.log('tableau d\'ajout: ');
+                  console.log(tab_lignes);
+
+                  $.ajax({
+                      url:'{{ path('ajax_add_line') }}',
+                      method:'POST',
+                      data:{tab: tab_lignes, id: id, tab_d: tab_D},
+                      success:function(){
+                          alert('le contenu est sauvegarder');
+                      }
+
+                  })
+              }
+              // ajax modification de la valeur de la colone validate
+              function confirm()
+              {
+                  var checkboxes = $('.boxcheck');
+                  var arrayIds = [];
+                  //parcour avec each
+                  $.each(checkboxes , function (index,value) {
+                      arrayIds.push($(this).data('id'))
+                  });
+                  console.log(arrayIds)
+                  setDisabled(arrayIds);
+                  //alert(disabled);
+              }
+          </script>
+
+
+
+  {% endblock %}

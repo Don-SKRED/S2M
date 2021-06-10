@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Courrier envoyés{% endblock %}
+{% block title %} Final {% endblock %}
 {% block navbar %}
+
     <header>
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="{{ path('page_index', {id: user.id}) }}"><h2>ACCUEIL</h2></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +43,7 @@
                         <h6 class="dropdown-header text-center" >CENTRE COURRIER</h6>
                         {% if app.user.received|length == 0 %}
                             <p class="text-center"> Aucun courrier reçus </p>
-                        {% elseif  app.user.received|filter(courrier => courrier.isVerify == true) %}
+                        {% else %}
                             {% for liste in listeCourrier %}
                                 {% if liste.recipient.id == user.id %}
                                     {% set bold = "" %}
@@ -111,105 +113,123 @@
     </header>
 {% endblock %}
 {% block body %}
-    <section class="container-fluid" style="margin-top: 70px">
-        <div class="card card-trap text-center">
-            <div class="card-header">
-                <div class="container">
-                    <h2>Courrier envoyés</h2>
-                </div>
-            </div>
-            <div class="card-body">
-                <table class="table table-striped table-bordered table_data">
-                    <thead>
-                    <tr>
-                        <th>Vers</th>
-                        <th>email du destinataire</th>
-                        <th>Nom du courrier</th>
-                        <th>Status</th>
-                        <th>Courrier</th>
-                        <th>Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+    <h3 class="text-center font-weight-bold"> verification <final></final></h3>
+    <fieldset class="border" style="width:400px; height:auto;" >
+        <legend class="w-auto font-weight-bold ">infos sur le courrier </legend>
+        {{ courrier.notes }}
+    </fieldset>
 
-                    {% for courrier in app.user.sent|filter(courrier => courrier.isVerify == true)%}
-                    <tr>
-                        <td>{{ courrier.recipient.Nom }}</td>
-                        <td>{{ courrier.recipient.email }}</td>
-                        <td>{{ courrier.nomC }}</td>
-                        <td>
-                            {% if courrier.status == "TRES URGENT" %}
-                                <span style="padding: 7px; border-radius: 50px; "> {{ courrier.status }}</span>
-                            {% elseif courrier.status == "URGENT" %}
-                                <span style="padding: 7px; border-radius: 50px;"> {{ courrier.status }}</span>
-                            {% else %}
-                                <span style="padding: 7px; border-radius: 50px;"> {{ courrier.status }} </span>
-                            {% endif %}
-                        <td>{{ courrier.fichier }}</td>
-                        <td>{{ courrier.createdAt|date  }}</td>
-                    </tr>
-                            {% else %}
-                    <tr>
-                        <td colspan="10">Aucun courrier envoyés</td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+    <table style="margin: 50px;" class="table table-striped table-bordered table_data">
+    <thead></thead>
+        <tr>
 
-    <a href="" class="scroll-to-top rounded" data-toggle="modal" data-target="#souscription2" style="display: inline;">
-        <img src="{{asset('assets/svg/notetask.png')}}" style="height:60px;" class="joker">
-    </a>
-    {# ------------------------------------------------------------------------ #}
-    <div class="modal fade" id="souscription2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-notify modal-warning" role="document">
-            <!--Content-->
-            <div class="modal-content">
-                <!--Header-->
-                <div class="modal-header text-center">
-                    <h4 class="modal-title white-text w-100 font-weight-bold py-2">Nouveau courrier</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" class="white-text">&times;</span>
-                    </button>
-                </div>
-                <!--Body-->
-                <div class="modal-body">
-                    {{ form_start(form) }}
-                    <div class="form-group">
-                        <div class="form-group">
-                            {{ form_label(form.nom_c)}}
-                            {{ form_widget(form.nom_c)}}
-                        </div>
-                        <div class="form-group">
-                            {{ form_label(form.notes)}}
-                            {{ form_widget(form.notes)}}
-                        </div>
-                        <div class="form-group">
-                            {{ form_label(form.status)}}
-                            {{ form_widget(form.status)}}
-                        </div>
-                        <div class="form-group">
-                            {{ form_label(form.fichier)}}
-                            {{ form_widget(form.fichier)}}
-                        </div>
-                        <div class="form-group">
-                            {{ form_label(form.recipient)}}
-                            {{ form_widget(form.recipient)}}
-                        </div>
-                    </div>
-                    <br />
-                </div>
-                <!--Footer-->
-                <div class="modal-footer justify-content-center">
-                    <a type="button"> {{form_widget(form.envoyer)}} <i class="fas fa-paper-plane-o ml-1"></i></a>
-                </div>
-            </div>
-            {{ form_end(form) }}
-            <!--/.Content-->
-        </div>
-    </div>
-    {#------------------------------------------------------------------------- #}
+            <th>Nom du courrier</th>
+            <th> N° BL </th>
+            <th>nom</th>
+            <th>prenom</th>
+            <th>numero</th>
+           {# <th>Valide 1</th> #}
+            <th>Valide 2</th>
+        </tr>
+    <tbody>
+
+    {% for piece in upload %}
+        <tr>
+            <td>{{ piece.courier.nomC }} </td>
+            <td> {{ piece.NBL }}</td>
+            <td>{{ piece.nom }}</td>
+            <td> {{ piece.prenom }} </td>
+            <td> {{ piece.numero }} </td>
+
+
+            <td class="d-none">
+                {# afficher l'ancienne validation avec sa valeur true ou false #}
+                {% set checked = piece.valide != 0 ? 'checked' : ''  %}
+                <input type="checkbox" {{ checked }} class="form-control v1 "  data-ident="{{ piece.id }}" disabled  >
+
+            </td>
+            <td>
+                <input type="checkbox" class="form-control v2 " data-id="{{ piece.id }}">
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+
+    <button  class="btn btn-success" onClick="testValidation()"> Envoyer </button>
+    <script>
+        //tester si valide 1 = valide 2 sinon mettre une alerte
+
+        function testValidation() {
+            //1 ere validation
+            var first_tab = [];
+            $('.v1').each(function (index, value) {
+                //recuperer la valeur du checkbox et l'id de celui-ci,
+                var firstCheck = $(this).is(":checked");
+                var id_firstval = $(this).data("ident");
+
+                var valSec = {
+                    'id': id_firstval,
+                    'checkbo': firstCheck,
+                }
+                first_tab.push(valSec);
+            })
+            console.log("v1:");
+            console.log(first_tab);
+
+
+            //2 eme validation
+            var second_tab = [];
+            $('.v2').each(function (index, value) {
+                //recuperer la valeur du checkbox et l'id de celui-ci,
+                var secCheck = $(this).is(":checked");
+                var id_secondVal = $(this).data("id");
+
+                var valSec = {
+                    'id': id_secondVal,
+                    'checkbo': secCheck,
+                }
+                second_tab.push(valSec);
+
+            })
+            console.log("v2: ");
+            console.log(second_tab);
+
+            //comparer les 2 tableaux
+            if (first_tab.length != second_tab.length) {
+                console.log('erreur de longueur');
+            }
+            else {
+
+                var reponse = true;
+                for (var i = 0; i < first_tab.length; i++) {
+                    //console.log(first_tab[i]['id']);
+                    if (first_tab[i]['checkbo'] != second_tab[i]['checkbo']) {
+                        reponse = false;
+                        break;
+                    }
+                }
+            }
+            if (reponse) {
+                //alert("tout est ok");
+                //changer la valeur dans la bd
+                $.ajax({
+                    url: '{{ path('ajax_validation') }}',
+                    method: 'POST',
+                    data: {second_tab: second_tab,res: reponse},
+                    success: function () {
+                        window.location.replace("{{path('send')}}");
+                    }
+                })
+            }
+            else
+                {
+                    console.log("tout n\'est pas ok");
+                    alert("le courrier n\' est pas ok")
+                }
+
+        }
+
+    </script>
 {% endblock %}

@@ -112,60 +112,82 @@
     </header>
 {% endblock %}
 {% block body %}
-    <h4 class="text-center"> Pieces</h4>
+    <h3 class="text-center font-weight-bold"> Pieces</h3>
+    <fieldset class="border" style="width:400px; height:auto;" >
+        <legend class="w-auto font-weight-bold ">Notes sur ce courrier </legend>
+            {{ courrier.notes }}
+    </fieldset>
+
     <table style="margin: 50px;" class="table table-striped table-bordered table_data">
         <thead></thead>
         <tr>
+            
             <th>Nom du courrier</th>
+
             <th>nom</th>
             <th>prenom</th>
             <th>numero</th>
             <th>Valide</th>
+           {# <th>Entrée</th> #}
         </tr>
         <tbody>
             {% set nbre_pieces = upload|length %}
             {% set nbre_pieces_check = 0 %}
             {% for piece in upload %}
                 <tr>
+                 
                     <td>{{ piece.courier.nomC }} </td>
+
                     <td>{{ piece.nom }}</td>
                     <td> {{ piece.prenom }} </td>
                     <td> {{ piece.numero }} </td>
                     {% set isChecked = piece.valide != 0 ? 'checked' : ''  %}
                     {% set isDisabled = piece.isDisabled != 0 ? 'disabled' : ''  %}
                     <td> <input type="checkbox" {{ isChecked }} class="form-control boxcheck" data-id="{{ piece.id }}" onchange="setValidate({{ piece.id }})" {{ isDisabled }}>
+
                      {% if piece.valide == 1 %}
                             {% set nbre_pieces_check = nbre_pieces_check + 1 %}
                         {% endif %}
                     </td>
+                   {# <td>
+                        <input type="text" class="form-control">
+                    </td>
+                    #}
+
                 </tr>
+
             {% endfor %}
         </tbody>
     </table>
-    {% set valid = (nbre_pieces == nbre_pieces_check) ? '' : 'd-none'  %}
-    <button class="btn btn-success {{ valid }}"  id="btn-validate" onclick="confirm()"> validation</button>
+   } {% set valid = (nbre_pieces == nbre_pieces_check) ? '' : 'd-none'  %}
+    <a href="{{path('received')}}" class="btn btn-success {{ valid }}"  id="btn-validate" onclick="confirm()"> validation</a>
+   {# <button class="btn btn-primary add" onclick="ajoutLigne()"> Ajouter </button>
+    <button class="btn btn-danger del" onclick="delLigne()"> supprimer </button>
+
+   
+    <button class="btn btn-dark" onclick="Save()"> Enregistrer</button> #}
+
 
     {#-------------------- notes de retour------------------------#}
-
+  
     <fieldset class="border float-right" style="margin:0px;padding:0px;width:500px;height:200px;" >
        <legend  class="w-auto">Notes d'erreur</legend>
        {{ form_start(form) }}
         <div id="notes">
-
           {{ form_widget(form.notes) }}
-      </div>
+        </div>
         <div class="d-none">
           {{ form_label(form.nom_c) }}
           {{ form_widget(form.nom_c) }}
-      </div>
+        </div>
         <div class="d-none">
           {{ form_label(form.status) }}
           {{ form_widget(form.status) }}
-      </div>
+        </div>
         <div class="d-none">
           {{ form_label(form.recipient) }}
           {{ form_widget(form.recipient) }}
-      </div>
+        </div>
         <div class="d-none">
           {{ form_label(form.fichier) }}
           {{ form_widget(form.fichier) }}
@@ -177,9 +199,65 @@
     {#-------------------- fin notes de retour------------------------#}
 
     <script>
-            var nbPiece = {{ nbre_pieces }}
-            var nbChecked = {{ nbre_pieces_check }};
-            // ajax modification de la valeur de la colone validate
+       var nbPiece = {{ nbre_pieces }};
+
+        var nbChecked = {{ nbre_pieces_check }};
+        //Ajout de ligne
+      /*  var ligne="<tr class='ligne'><td><input type='checkbox'  name='select' ></td><td><input type='text' class='form-control courier'  ></td> <td><input type='text' class='form-control nom' name='' ></td> <td><input type='text' name='' class='form-control prenom'></td> <td><input type='text' name='' class='form-control numero'></td> <td><input type='checkbox'  class='form-control boxcheck' name='' ></td>";
+        function ajoutLigne()
+        {
+            $(".table_data > tbody:last").append(ligne);
+        }
+        function delLigne()
+        {
+            $(".table_data").find('input[name="select"]').each(function(){
+                if($(this).is(":checked"))
+                {
+                    $(this).parents("table.table_data tr").remove();
+                }
+            })
+        }*/
+    //methode pour enregistrer en BD les ajouts et suppressions
+    /*    function Save()
+        {
+            
+            var tab_lignes = [];
+            $.each($('.ligne') , function (index,value) {
+                var el_courier = value.getElementsByClassName('courier')
+                var courier = $(el_courier).val();
+                var el_nom = value.getElementsByClassName('nom')
+                var nom = $(el_nom).val();
+                var el_prenom = value.getElementsByClassName('prenom')
+                var prenom = $(el_prenom).val();
+                var el_numero = value.getElementsByClassName('numero')
+                var numero = $(el_numero).val();
+                var el_boxcheck = value.getElementsByClassName('boxcheck')
+                var boxcheck = $(el_boxcheck).is(":checked");
+
+               var ligne = {
+                   'courier' : courier,
+                   'nom' : nom,
+                   'prenom' : prenom,
+                   'numero' : numero,
+                   'boxcheck' : boxcheck,
+               }
+                tab_lignes.push(ligne);
+
+            });
+
+            console.log('tab_lignes')
+            console.log(tab_lignes)
+            $.ajax({
+
+                method:'POST',
+                data:{tab: tab_lignes, id: id},
+                success:function(){
+
+                }
+
+            })
+        }*/
+                // ajax modification de la valeur de la colone validate
             function setValidate(id){
                 $.ajax({
                     url : '{{ path('ajax_validate_courier') }}' ,
@@ -223,6 +301,7 @@
             {
                 var checkboxes = $('.boxcheck');
                 var arrayIds = [];
+                //parcour avec each
                 $.each(checkboxes , function (index,value) {
                     arrayIds.push($(this).data('id'))
                 });
