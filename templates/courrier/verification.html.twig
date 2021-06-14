@@ -34,7 +34,7 @@
                         {% if i == 0 %}
                             <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter d-none ">  {{ i }}</span>
                         {% else %}
-                            <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter ">  {{ i }}</span>
+                            <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter "></span>
                         {% endif %}
                         {# fin #}
                     </a>
@@ -183,7 +183,7 @@
           <button class="btn btn-primary add" onclick="ajoutLigne()"> Ajouter </button>
           <button class="btn btn-danger del" onclick="delLigne()"> supprimer </button>
           {#  buton enregistrer pour enregistrer les nouvelles valeurs#}
-          <a href="{{ path('second_verification',{id: courrier.id}) }}" class="btn btn-dark" onclick="Save()"> Enregistrer</a>
+          <a href="{{ path('second_verification',{id: courrier.id}) }}" class="btn btn-dark" onclick="Save()"> Suivant</a>
 
 
           <script>

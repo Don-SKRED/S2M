@@ -33,7 +33,7 @@
                         {% if i == 0 %}
                             <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter d-none ">  {{ i }}</span>
                         {% else %}
-                            <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter ">  {{ i }}</span>
+                            <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter "> </span>
                         {% endif %}
                         {# fin #}
                     </a>
@@ -129,6 +129,13 @@
                                 <th>Courrier</th>
                                 <th>Date</th>
                                 <th>Actions</th>
+                                 {% for courrier in app.user.received|filter(courrier => courrier.isVerify == true)%}
+                        {% if courrier.valider == 1 %}
+                            
+                                <th>valide</th>
+                            
+                        {% endif %}
+                        {% endfor %}
                             </tr>
                             </thead>
                             <tbody>
@@ -160,12 +167,13 @@
                                         <a href="{{ path("excel", {id: courrier.id}) }}" class="btn btn-info">Voir</a>
                                         {% set files = courrier.fichier|split('/')%}
                                         {% set lfiles = files|length - 1 %}
-                                        <a href="{{asset('Courrier/'~ files[lfiles]) }}" class="btn btn-dark">Telecharger</a>
+                                       {# <a href="{{asset('Courrier/'~ files[lfiles]) }}" class="btn btn-dark">Telecharger</a>#}
                                     </td>
-                                 {#<td>
-                                     <img src="{{ asset('assets/svg/Checked.svg') }}" style="">
-
-                                </td>   #}
+                                        {% if courrier.valider == 1 %}
+                                   <td>
+                                <img src="{{ asset('assets/svg/Checked.svg') }}" style="height:30px;">
+                                    </td>
+                                        {% endif %}
                             </tr>
 
 
@@ -228,7 +236,7 @@
                                                 </div>
                                                 <!--Footer-->
                                                 <div class="modal-footer justify-content-center">
-                                                    <a type="button"> {{form_widget(form.envoyer)}} <i class="fas fa-paper-plane-o ml-1"></i></a>
+                                                    <a  type="button"> {{ form_widget(form.envoyer, { 'label': 'verification' }) }} <i class="fas fa-paper-plane-o ml-1"></i></a>
                                                 </div>
                                             </div>
                                             {{ form_end(form) }}

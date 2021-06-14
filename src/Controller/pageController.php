@@ -75,7 +75,7 @@ class pageController extends AbstractController
            $em->persist($courrier);
            $em->flush();
            //mercuryflash
-            $flashy->success('Courrier envoyé avec succès!');
+           // $flashy->success('Courrier envoyé avec succès!');
         
            $id_courrier = $courrier->getId();
 
@@ -96,13 +96,14 @@ class pageController extends AbstractController
                    ':is_disabled' => 0,
                    ':n_bl' => '',
                    ':second_valide' => 0,
+                   ':valide_recipient' => 0,
                );
 
 
 
-                 $query = "INSERT INTO upload ( nom, prenom, numero, courier_id, valide, is_disabled, n_bl, second_valide) VALUES ( :nom, :prenom, :numero, :courier_id, :valide, :is_disabled, :n_bl, :second_valide)";
-                 $statement = $pdo->prepare($query);
-                 $statement->execute($insert_data);
+               $query = "INSERT INTO upload ( nom, prenom, numero, courier_id, valide, is_disabled, n_bl, second_valide, valide_recipient) VALUES ( :nom, :prenom, :numero, :courier_id, :valide, :is_disabled, :n_bl, :second_valide, :valide_recipient)";
+               $statement = $pdo->prepare($query);
+               $statement->execute($insert_data);
              }
            
 
@@ -147,53 +148,62 @@ class pageController extends AbstractController
         $user = $this->getUser();
         $form = $this->createForm(CourrierType::class,$courrier);
         $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $file = $courrier->getFichier();
 
-     if($form->isSubmitted() && $form->isValid())
-       {
-           $file = $courrier->getFichier();
-           $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-           $typemimes = $file->getClientMimeType();
-           // this is needed to safely include the file name as part of the URL
-           $newFilename2 = $this->getParameter('upload_directory').'/'.$originalFilename.'-'.uniqid().'.'.$file->getClientOriginalExtension();
-           $UploadedFile = $file->move($this->getParameter('upload_directory'), $newFilename2);
+            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $typemimes = $file->getClientMimeType();
+            // this is needed to safely include the file name as part of the URL
+            $newFilename2 = $this->getParameter('upload_directory').'/'.$originalFilename.'-'.uniqid().'.'.$file->getClientOriginalExtension();
+            //$newFilename2 = $originalFilename.'-'.uniqid().'.'.$file->getClientOriginalExtension();
+            $UploadedFile = $file->move($this->getParameter('upload_directory'), $newFilename2);
 
-           //dump($test->getPathname());die;
-           $courrier->setFichier($newFilename2);
+            //dump($test->getPathname());die;
+            $courrier->setFichier($newFilename2);
 
-           //prendre l'envoyeur
-           $courrier->setSender($this->getUser());
-           $em =$this->getDoctrine()->getManager();
-           $em->persist($courrier);
-           $em->flush();;
-
+            //prendre l'envoyeur
+            $courrier->setSender($this->getUser());
+            $em =$this->getDoctrine()->getManager();
+            $em->persist($courrier);
+            $em->flush();
             //mercuryflash
-        $flashy->success('Courrier envoyé avec succès!');
-          $id_courrier = $courrier->getId();
+           // $flashy->success('Courrier envoyé avec succès!');
 
-           //si le fichier existe
-           $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($UploadedFile->getPathname());
-           $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type );
+            $id_courrier = $courrier->getId();
 
-           $spreadsheet = $reader->load($UploadedFile->getPathname());
-           $data = $spreadsheet->getActiveSheet()->toArray();
+            //si le fichier existe
+            $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($UploadedFile->getPathname());
+            $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type );
 
-           foreach ($data as $row) {
-               $insert_data = array(
-                   ':nom' => $row[0],
-                   ':prenom' => $row[1],
-                   ':numero' => $row[2],
-                   ':courier_id' => $id_courrier,
-                   ':valide' => 0,
-                   ':is_disabled' => 0
-               );
+            $spreadsheet = $reader->load($UploadedFile->getPathname());
+            $data = $spreadsheet->getActiveSheet()->toArray();
 
-            /*   $query = "INSERT INTO upload ( nom, prenom, numero, courier_id, valide, is_disabled) VALUES ( :nom, :prenom, :numero, :courier_id, :valide, :is_disabled)";
-              $statement = $pdo->prepare($query);
-               $statement->execute($insert_data); */
-             }
+            foreach ($data as $row) {
+                $insert_data = array(
+                    ':nom' => $row[0],
+                    ':prenom' => $row[1],
+                    ':numero' => $row[2],
+                    ':courier_id' => $id_courrier,
+                    ':valide' => 0,
+                    ':is_disabled' => 0,
+                    ':n_bl' => '',
+                    ':second_valide' => 0,
+                    ':valide_recipient' => 0,
+                );
 
-            return $this->redirectToRoute("send");
+
+
+                $query = "INSERT INTO upload ( nom, prenom, numero, courier_id, valide, is_disabled, n_bl, second_valide, valide_recipient) VALUES ( :nom, :prenom, :numero, :courier_id, :valide, :is_disabled, :n_bl, :second_valide, :valide_recipient)";
+                $statement = $pdo->prepare($query);
+                $statement->execute($insert_data);
+            }
+
+
+
+            return $this->redirectToRoute("verify",['id' => $courrier->getId()]);
         }
+
 
 
         return $this->render("courrier/send.html.twig",[
@@ -219,70 +229,72 @@ class pageController extends AbstractController
        }
 
         $courrier = new Courrier();
-       $user = $this->getUser();
-       $form = $this->createForm(CourrierType::class,$courrier);
-       $form->handleRequest($request);
-       if($form->isSubmitted() && $form->isValid())
-       {
-           $file = $courrier->getFichier();
-           $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $user = $this->getUser();
+        $form = $this->createForm(CourrierType::class,$courrier);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $file = $courrier->getFichier();
+
+            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $typemimes = $file->getClientMimeType();
+            // this is needed to safely include the file name as part of the URL
+            $newFilename2 = $this->getParameter('upload_directory').'/'.$originalFilename.'-'.uniqid().'.'.$file->getClientOriginalExtension();
+            //$newFilename2 = $originalFilename.'-'.uniqid().'.'.$file->getClientOriginalExtension();
+            $UploadedFile = $file->move($this->getParameter('upload_directory'), $newFilename2);
+
+            //dump($test->getPathname());die;
+            $courrier->setFichier($newFilename2);
+
+            //prendre l'envoyeur
+            $courrier->setSender($this->getUser());
+            $em =$this->getDoctrine()->getManager();
+            $em->persist($courrier);
+            $em->flush();
+            //mercuryflash
+            //$flashy->success('Courrier envoyé avec succès!');
+
+            $id_courrier = $courrier->getId();
+
+            //si le fichier existe
+            $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($UploadedFile->getPathname());
+            $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type );
+
+            $spreadsheet = $reader->load($UploadedFile->getPathname());
+            $data = $spreadsheet->getActiveSheet()->toArray();
+
+            foreach ($data as $row) {
+                $insert_data = array(
+                    ':nom' => $row[0],
+                    ':prenom' => $row[1],
+                    ':numero' => $row[2],
+                    ':courier_id' => $id_courrier,
+                    ':valide' => 0,
+                    ':is_disabled' => 0,
+                    ':n_bl' => '',
+                    ':second_valide' => 0,
+                    ':valide_recipient' => 0,
+                );
 
 
-           $typemimes = $file->getClientMimeType();
-           // this is needed to safely include the file name as part of the URL
-           //$newFilename = $originalFilename.'-'.uniqid().'.'.$file->getClientOriginalExtension();
+
+                $query = "INSERT INTO upload ( nom, prenom, numero, courier_id, valide, is_disabled, n_bl, second_valide, valide_recipient) VALUES ( :nom, :prenom, :numero, :courier_id, :valide, :is_disabled, :n_bl, :second_valide, :valide_recipient)";
+                $statement = $pdo->prepare($query);
+                $statement->execute($insert_data);
+            }
 
 
-           // envoye du fichier sur la base de données
-           //  $filename = $file->getClientOriginalName();
-           //$UploadedFile = $file->move($this->getParameter('upload_directory'), $newFilename);
 
-           $newFilename2 = $this->getParameter('upload_directory').'/'.$originalFilename.'-'.uniqid().'.'.$file->getClientOriginalExtension();
-           $UploadedFile = $file->move($this->getParameter('upload_directory'), $newFilename2);
+            return $this->redirectToRoute("verify",['id' => $courrier->getId()]);
+        }
 
-           //dump($test->getPathname());die;
-           $courrier->setFichier($newFilename2);
-
-           //prendre l'envoyeur
-           $courrier->setSender($this->getUser());
-           $em =$this->getDoctrine()->getManager();
-           $em->persist($courrier);
-           $em->flush();
-             $id_courrier = $courrier->getId();
-
-           //si le fichier existe
-           $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($UploadedFile->getPathname());
-           $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type );
-
-           $spreadsheet = $reader->load($UploadedFile->getPathname());
-           $data = $spreadsheet->getActiveSheet()->toArray();
-
-           foreach ($data as $row) {
-               $insert_data = array(
-                   ':nom' => $row[0],
-                   ':prenom' => $row[1],
-                   ':numero' => $row[2],
-                   ':courier_id' => $id_courrier,
-                   ':valide' => 0,
-                   ':is_disabled' => 0
-               );
-
-               $query = "INSERT INTO upload ( nom, prenom, numero, courier_id, valide, is_disabled) VALUES ( :nom, :prenom, :numero, :courier_id, :valide, :is_disabled)";
-               $statement = $pdo->prepare($query);
-               $statement->execute($insert_data);
-             }
-           //mercuryflash
-        $flashy->success('Courrier envoyé avec succès!');
-
-            return $this->redirectToRoute("send");
-            
-      }
         return $this->render('courrier/received.html.twig',[
             "form" => $form->createView(),
              "user" => $user,
             "listeCourrier" => $CourrierRepository->findBy(array('is_verify' => 'true'),
                 array('created_at' =>'desc'),
                 4,0),
+            //'upload' => $uploadRepository->findBy(["courier" => ["id" => $id_courrier]])
 
 
             
@@ -291,7 +303,7 @@ class pageController extends AbstractController
     /**
      * @Route("/excel/{id}", name="excel",methods={"GET","POST"})
      */
-    public function excel_show(Request $request, Courrier $courrier, CourrierRepository $CourrierRepository, UploadRepository $uploadRepository): Response
+    public function excel_show(Request $request,FlashyNotifier $flashy, Courrier $courrier, CourrierRepository $CourrierRepository, UploadRepository $uploadRepository): Response
     {
 
 
@@ -323,6 +335,7 @@ class pageController extends AbstractController
             $fichier = new File($courrier->getFichier());
             //$cour->setFichier($fichier->getPathname());
             $cour->setStatus($courrier->getStatus());
+            $cour->setIsVerify(true);
 
             // dump($file = $cour->getFichier()->getPathname());die;
            // $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
@@ -338,10 +351,11 @@ class pageController extends AbstractController
             $cour->setFichier($fichier->getPathname());
 
             //prendre l'envoyeur
-            $courrier->setSender($this->getUser());
+            $cour->setSender($this->getUser());
             $em =$this->getDoctrine()->getManager();
             $em->persist($cour);
             $em->flush();
+            $flashy->success('rapport d\'erreur du courrier envoyé avec succès!');
 
             $file_type = \PhpOffice\PhpSpreadsheet\IOFactory::identify($UploadedFile->getPathname());
             $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($file_type );
@@ -349,7 +363,7 @@ class pageController extends AbstractController
             $spreadsheet = $reader->load($UploadedFile->getPathname());
             $data = $spreadsheet->getActiveSheet()->toArray();
             $id_courrier = $courrier->getId();
-            $requete =  "SELECT nom,prenom,numero,courier_id,valide FROM upload where courier_id = ".$id_courrier;
+            $requete =  "SELECT nom,prenom,numero,courier_id,valide,is_disabled, n_bl, second_valide,valide_recipient FROM upload where courier_id = ".$id_courrier;
             $reponse2 = $pdo->query($requete);
 
 
@@ -365,11 +379,14 @@ class pageController extends AbstractController
                             ':numero' => $donnees2['numero'],
                             ':courier_id' => $cour->getId(),
                             ':valide' => $donnees2['valide'],
-                       ':is_disabled' => 0
+                            ':is_disabled' => 0,
+                            ':n_bl' => $donnees2['n_bl'],
+                            ':second_valide' => $donnees2['second_valide'],
+                            ':valide_recipient' => $donnees2['valide_recipient']
                );
 
-                       $query = "INSERT INTO upload ( nom, prenom, numero, courier_id, valide, is_disabled) VALUES ( :nom, :prenom, :numero, :courier_id, :valide, :is_disabled)";
-                      $statement = $pdo->prepare($query);
+                        $query = "INSERT INTO upload ( nom, prenom, numero, courier_id, valide, is_disabled, n_bl, second_valide, valide_recipient) VALUES ( :nom, :prenom, :numero, :courier_id, :valide, :is_disabled, :n_bl, :second_valide, :valide_recipient)";
+                        $statement = $pdo->prepare($query);
                         $statement->execute($insert_data);
 
                     }
@@ -379,10 +396,6 @@ class pageController extends AbstractController
             return $this->redirectToRoute("send");
 
         }
-
-
-
-
 
         $user = $this->getUser();
 
@@ -496,7 +509,7 @@ class pageController extends AbstractController
 
         $id = $request->request->get('id'); // recuperation de données envoyer par POST
         $upload = $uploadRepository->find($id);
-        $upload->setValide(!$upload->getValide());
+        $upload->setValideRecipient(!$upload->getValideRecipient());
         $em =$this->getDoctrine()->getManager();
         $em->persist($upload);
         $em->flush();
@@ -536,6 +549,8 @@ class pageController extends AbstractController
                $upload->setIsDisabled($dis);
                $upload->setCourier($id_co[0]);
                $upload->setNBl($tab[$i]['N_BL']);
+               $upload->setSecondValide(false);
+               $upload->setValideRecipient(false);
 
                 $em =$this->getDoctrine()->getManager();
                 $em->persist($upload);
@@ -596,12 +611,13 @@ class pageController extends AbstractController
     /**
      * @Route("/ajax-disabled-courier", name="ajax_disabled_courier",methods={"POST"})
      */
-    public function ajax_disabled_courier(Request $request, UploadRepository $uploadRepository): Response
+    public function ajax_disabled_courier(Request $request,EntityManagerInterface $entityManager, UploadRepository $uploadRepository): Response
     {
         $ids = $request->request->get('ids'); // recuperation de données envoyer par POST
         //var_dump($ids);die;
         $nom = ['test'];
         foreach ($ids as $id) {
+
             $upload = $uploadRepository->find($id);
             //$upload->setIsDisabled(!$upload->getIsDisabled());
             $upload->setIsDisabled(true);
@@ -609,6 +625,14 @@ class pageController extends AbstractController
             $em->persist($upload);
             $em->flush();
         }
+
+        //courrier valider
+      $up = $uploadRepository->find($ids[0]);
+        $couri = $entityManager->getRepository(Courrier::class)->find($up->getCourier()->getId());
+        $couri->setValider(1);
+        $entityManager->flush();
+
+
     // si php -> twig
        // $response = json_encode($nom);
         return new Response ('ok');

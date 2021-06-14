@@ -60,7 +60,7 @@
                     {% if i == 0 %}
                     <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter d-none ">  {{ i }}</span>
                         {% else %}
-                            <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter ">  {{ i }}</span>
+                            <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter "> </span>
                         {% endif %}
                     {# fin #}
 
@@ -246,14 +246,11 @@
 
                                                     </div>
                                                     <br />
-
-
-
                                                 </div>
 
                                                 <!--Footer-->
                                                 <div class="modal-footer justify-content-center">
-                                                     <a  type="button"> {{form_widget(form.envoyer)}} <i class="fas fa-paper-plane-o ml-1"></i></a>
+                                                     <a  type="button"> {{ form_widget(form.envoyer, { 'label': 'verification' }) }} <i class="fas fa-paper-plane-o ml-1"></i></a>
                                                 </div>
                                             </div>
                                             {{ form_end(form) }}

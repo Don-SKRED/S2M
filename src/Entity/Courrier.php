@@ -68,9 +68,15 @@ class Courrier
      */
     private $is_verify;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $valider;
+
     public function __construct()
     {
         $this->is_verify = false;
+        $this->valider = false;
         $this->created_at = new \DateTime();
         $this->libelles = new ArrayCollection();
     }
@@ -184,6 +190,18 @@ class Courrier
     public function setIsVerify(bool $is_verify): self
     {
         $this->is_verify = $is_verify;
+
+        return $this;
+    }
+
+    public function getValider(): ?bool
+    {
+        return $this->valider;
+    }
+
+    public function setValider(bool $valider): self
+    {
+        $this->valider = $valider;
 
         return $this;
     }

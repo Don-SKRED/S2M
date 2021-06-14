@@ -58,6 +58,11 @@ class Upload
      */
     private $second_valide;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $valide_recipient;
+
 
     public function getId(): ?int
     {
@@ -162,6 +167,18 @@ class Upload
     public function setSecondValide(bool $second_valide): self
     {
         $this->second_valide = $second_valide;
+
+        return $this;
+    }
+
+    public function getValideRecipient(): ?bool
+    {
+        return $this->valide_recipient;
+    }
+
+    public function setValideRecipient(bool $valide_recipient): self
+    {
+        $this->valide_recipient = $valide_recipient;
 
         return $this;
     }

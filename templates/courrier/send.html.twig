@@ -32,7 +32,7 @@
                         {% if i == 0 %}
                             <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter d-none ">  {{ i }}</span>
                         {% else %}
-                            <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter ">  {{ i }}</span>
+                            <span class="badge rounded-pill badge-notification bg-danger badge badge-danger badge-counter "></span>
                         {% endif %}
                         {# fin #}
                     </a>
@@ -128,12 +128,20 @@
                         <th>Status</th>
                         <th>Courrier</th>
                         <th>Date</th>
+                        {% for courrier in app.user.sent|filter(courrier => courrier.isVerify == true)%}
+                        {% if courrier.valider == 1 %}
+                            
+                                <th>valide</th>
+                            
+                        {% endif %}
+                        {% endfor %}
                     </tr>
                     </thead>
                     <tbody>
 
                     {% for courrier in app.user.sent|filter(courrier => courrier.isVerify == true)%}
                     <tr>
+
                         <td>{{ courrier.recipient.Nom }}</td>
                         <td>{{ courrier.recipient.email }}</td>
                         <td>{{ courrier.nomC }}</td>
@@ -147,6 +155,11 @@
                             {% endif %}
                         <td>{{ courrier.fichier }}</td>
                         <td>{{ courrier.createdAt|date  }}</td>
+                        {% if courrier.valider == 1 %}
+                            <td>
+                                <img src="{{ asset('assets/svg/Checked.svg') }}" style="height:30px;">
+                            </td>
+                        {% endif %}
                     </tr>
                             {% else %}
                     <tr>
@@ -204,7 +217,7 @@
                 </div>
                 <!--Footer-->
                 <div class="modal-footer justify-content-center">
-                    <a type="button"> {{form_widget(form.envoyer)}} <i class="fas fa-paper-plane-o ml-1"></i></a>
+                    <a  type="button"> {{ form_widget(form.envoyer, { 'label': 'verification' }) }} <i class="fas fa-paper-plane-o ml-1"></i></a>s
                 </div>
             </div>
             {{ form_end(form) }}

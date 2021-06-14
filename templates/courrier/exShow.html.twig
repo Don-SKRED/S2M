@@ -118,13 +118,13 @@
             {{ courrier.notes }}
     </fieldset>
 
-    <table style="margin: 50px;" class="table table-striped table-bordered table_data">
+    <table style="margin: 50px;" class="table table-striped table-bordered table_data3">
         <thead></thead>
         <tr>
             
             <th>Nom du courrier</th>
-
             <th>nom</th>
+            <th>N° BL</th>
             <th>prenom</th>
             <th>numero</th>
             <th>Valide</th>
@@ -135,17 +135,18 @@
             {% set nbre_pieces_check = 0 %}
             {% for piece in upload %}
                 <tr>
-                 
+
                     <td>{{ piece.courier.nomC }} </td>
 
                     <td>{{ piece.nom }}</td>
+                    <td>{{ piece.NBL }}</td>
                     <td> {{ piece.prenom }} </td>
                     <td> {{ piece.numero }} </td>
-                    {% set isChecked = piece.valide != 0 ? 'checked' : ''  %}
+                    {% set isChecked = piece.valideRecipient != 0 ? 'checked' : ''  %}
                     {% set isDisabled = piece.isDisabled != 0 ? 'disabled' : ''  %}
                     <td> <input type="checkbox" {{ isChecked }} class="form-control boxcheck" data-id="{{ piece.id }}" onchange="setValidate({{ piece.id }})" {{ isDisabled }}>
 
-                     {% if piece.valide == 1 %}
+                     {% if piece.valideRecipient == 1 %}
                             {% set nbre_pieces_check = nbre_pieces_check + 1 %}
                         {% endif %}
                     </td>
@@ -159,7 +160,7 @@
             {% endfor %}
         </tbody>
     </table>
-   } {% set valid = (nbre_pieces == nbre_pieces_check) ? '' : 'd-none'  %}
+    {% set valid = (nbre_pieces == nbre_pieces_check) ? '' : 'd-none'  %}
     <a href="{{path('received')}}" class="btn btn-success {{ valid }}"  id="btn-validate" onclick="confirm()"> validation</a>
    {# <button class="btn btn-primary add" onclick="ajoutLigne()"> Ajouter </button>
     <button class="btn btn-danger del" onclick="delLigne()"> supprimer </button>
@@ -305,7 +306,7 @@
                 $.each(checkboxes , function (index,value) {
                     arrayIds.push($(this).data('id'))
                 });
-                console.log(arrayIds)
+                console.log(arrayIds);
                 setDisabled(arrayIds);
                 //alert(disabled);
             }
