@@ -128,12 +128,18 @@
                         <th>Status</th>
                         <th>Courrier</th>
                         <th>Date</th>
+                        {% set break = false %}
                         {% for courrier in app.user.sent|filter(courrier => courrier.isVerify == true)%}
-                        {% if courrier.valider == 1 %}
-                            
-                                <th>valide</th>
-                            
-                        {% endif %}
+                        {% if not break %}
+                                        {% if courrier.valider == 1 %}
+                                            <th>valide</th>
+                                            {% set break = true %}
+                                        {% else %}
+                                             <th>valide</th>
+                                            {% set break = true %}
+                                    
+                                        {% endif %}
+                                    {% endif %}
                         {% endfor %}
                     </tr>
                     </thead>
@@ -155,11 +161,25 @@
                             {% endif %}
                         <td>{{ courrier.fichier }}</td>
                         <td>{{ courrier.createdAt|date  }}</td>
-                        {% if courrier.valider == 1 %}
-                            <td>
-                                <img src="{{ asset('assets/svg/Checked.svg') }}" style="height:30px;">
-                            </td>
-                        {% endif %}
+                       
+                          {% if courrier.valider == 1 %}
+                                               <td>
+                                                    <img src="{{ asset('assets/svg/Checked.svg') }}" style="height:30px;">
+                                                    {% set lc = courrier.nomC|length - 1 %}
+                                                    
+                                               </td>
+                                        {% elseif courrier.valider == 0 %}
+                                            {% if courrier.nomC|last == ')' %}
+                                                
+                                                <td>
+                                                 <img src="{{ asset('assets/svg/warning_115257.svg') }}" style="height:30px;"></td>
+                                            {% else %}
+                                                 <td>
+                                                 <img src="{{ asset('assets/svg/clock.svg') }}" style="height:30px;"></td>
+
+                                            {% endif %}
+                                            
+                                        {% endif %}
                     </tr>
                             {% else %}
                     <tr>

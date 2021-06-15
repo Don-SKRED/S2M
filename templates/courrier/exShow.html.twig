@@ -112,14 +112,17 @@
     </header>
 {% endblock %}
 {% block body %}
-    <h3 class="text-center font-weight-bold"> Pieces</h3>
-    <fieldset class="border" style="width:400px; height:auto;" >
-        <legend class="w-auto font-weight-bold ">Notes sur ce courrier </legend>
-            {{ courrier.notes }}
-    </fieldset>
 
-    <table style="margin: 50px;" class="table table-striped table-bordered table_data3">
-        <thead></thead>
+    <fieldset class="border" style="width:400px; height:auto; margin-left:30px;" >
+        <legend class="w-auto font-weight-bold "><h3>Notes sur ce courrier</h3> </legend>
+            <h6> {{ courrier.notes }} </h6>
+    </fieldset>
+<div class="row text-center" style="margin-top: 30px">
+    <div class="col-12 justify-content-center">
+        <div class="card card-trap"><div class="card-header">  <h1>Pieces</h1></div>
+            <div class="card-body">
+                 <table class="table table-striped table-bordered " id="data_table">
+        <thead>
         <tr>
             
             <th>Nom du courrier</th>
@@ -130,6 +133,7 @@
             <th>Valide</th>
            {# <th>Entrée</th> #}
         </tr>
+        </thead>
         <tbody>
             {% set nbre_pieces = upload|length %}
             {% set nbre_pieces_check = 0 %}
@@ -160,8 +164,16 @@
             {% endfor %}
         </tbody>
     </table>
-    {% set valid = (nbre_pieces == nbre_pieces_check) ? '' : 'd-none'  %}
-    <a href="{{path('received')}}" class="btn btn-success {{ valid }}"  id="btn-validate" onclick="confirm()"> validation</a>
+                {% set valid = (nbre_pieces == nbre_pieces_check) ? '' : 'd-none'  %}
+                <a href="{{path('received')}}" class="btn btn-success {{ valid }}"  id="btn-validate" onclick="confirm()"> validation</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
    {# <button class="btn btn-primary add" onclick="ajoutLigne()"> Ajouter </button>
     <button class="btn btn-danger del" onclick="delLigne()"> supprimer </button>
 
@@ -200,7 +212,7 @@
     {#-------------------- fin notes de retour------------------------#}
 
     <script>
-       var nbPiece = {{ nbre_pieces }};
+              var nbPiece = {{ nbre_pieces }};
 
         var nbChecked = {{ nbre_pieces_check }};
         //Ajout de ligne
