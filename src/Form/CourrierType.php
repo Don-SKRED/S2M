@@ -48,6 +48,7 @@ class CourrierType extends AbstractType
                 ]
             ])
             ->add('fichier',FileType::class,[
+               // "data_class" => null,
                 'required' => false,
                 'label' => 'choississez votre fichier',
                 "attr" => [

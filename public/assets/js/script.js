@@ -16,15 +16,15 @@ $(document).ready(function($) {
                 },
             },
             //spécifier pour la table courrier
-        //    "order": [[0, 'desc'], [1, 'desc'], [2, 'desc'], [3, 'desc'], [4, 'desc'], [5, 'desc']]
-            /* "columnDefs": [
+           "order": [[0, 'desc'], [1, 'desc'], [2, 'desc'], [3, 'desc'], [4, 'desc'], [5, 'desc']],
+             "columnDefs": [
                  {
                      "orderSequence" : [ "asc", "desc" ],
                      "targets" : "_all"
                  }
-             ]*/
-        }
-    );
+             ]
+        });
+
     $('.table_data2').DataTable({
 
         "language": {

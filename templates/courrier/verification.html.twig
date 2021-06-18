@@ -113,22 +113,16 @@
     </header>
 {% endblock %}
       {% block body %}
-
   <fieldset class="border" style="width:400px; height:auto; margin-left:30px;" >
-              <legend class="w-auto font-weight-bold "><h4> A propos du courrier </h4> </legend>
-                        <p > <span class="font-weight-bold"> NOM Courrier : </span> {{ courrier.nomC }}  </p>
-                           <p > <span class="font-weight-bold"> Notes : </span> {{ courrier.notes }}  </p>
-                              <p > <span class="font-weight-bold"> Status : </span> {{ courrier.status }}  </p>
-                                 <p > <span class="font-weight-bold"> Destinataire : </span> {{ courrier.recipient.nom }}  </p>
-                      
-
-          </fieldset>
-
-          
+      <legend class="w-auto font-weight-bold "><h4> A propos du courrier </h4> </legend>
+      <p> <span class="font-weight-bold"> NOM Courrier : </span> {{ courrier.nomC }}  </p>
+      <p> <span class="font-weight-bold"> Notes : </span> {{ courrier.notes }}  </p>
+      <p> <span class="font-weight-bold"> Status : </span> {{ courrier.status }}  </p>
+      <p> <span class="font-weight-bold"> Destinataire : </span> {{ courrier.recipient.nom }}  </p>
+  </fieldset>
           <div class="row text-center" style="margin-top: 30px">
               <div class="col-12 justify-content-center">
                 <div class="card card-trap"><div class="card-header">  <h1>vérification des pieces</h1></div>
-
                     <div class="card-body">
                         <button class="btn btn-primary add" onclick="ajoutLigne()"> Ajouter </button>
                         <button class="btn btn-danger del" onclick="delLigne()" title ="Pour supprimer une ou plusieurs lignes cliquer sur une des cases à cocher correspondant de la colonne choix"> supprimer </button>
@@ -136,80 +130,70 @@
               <thead>
               <tr>
                   <th class="text-center" style="width:30px" >  choix </th>
-                  <th class="text-center" style="width:200px" >Nom du courrier</th>
-                  <th class="text-center" style="width:200px" > N° BL </th>
-                  <th class="text-center" >nom</th>
-                  <th class="text-center">prenom</th>
-                  <th class="text-center" style="width:200px">numero</th>
+                  <th class="text-center" style="width:200px" >N° cmd</th>
+                  <th class="text-center" style="width:200px" > N° récept </th>
+                  <th class="text-center" >N°BL</th>
+                  <th class="text-center">Fournisseur</th>
+                  <th class="text-center" style="width:200px">Rayon</th>
+                  <th class="text-center" style="width:200px">D.réception</th>
+                  <th class="text-center" style="width:200px">Montant HT</th>
                   <th class="text-center"  style="width:60px;">Valide</th>
                   {# <th>Entrée</th> #}
               </tr>
               </thead>
               <tbody>
+              {% set nbPiece = 0 %}
+              {% for piece in pieces %}
 
-              {#si on ne met pas dans la base mais seulement de l'affichage #}
-          {#  {% for piece in data %}
-                {{ dump(piece) }}
-                  <tr class="ligne_depart">
-                      <td>  <input type="checkbox" name="select"></td>
-
-                      <td class="nom_courrier"> {{ courrier.nomC }}</td>
-                      <td class="col_NBL"> <input type="text" class="form-control inp_nbl"> </td>
-                      {%  for p in piece %}
-                          {{ dump(p) }}
-                          <td>{{ p }}</td>
-
-                      {% endfor %}
-                      <td class="col_checkbox"> <input type="checkbox" class="form-control boxcheck" data-id="" ></td>
-
-                      {# <td>
-                           <input type="text" class="form-control">
-                       </td>
-                       #}
-
-              {% for piece in upload %}
                   <tr class="ligne_depart" data-id="{{ piece.id }}">
                       <td>  <input type="checkbox" class="del" name="select" data-ident="{{ piece.id }}"> </td>
-                      <td class="text-center">{{ piece.courier.nomC }} </td>
+                      <td class="text-center">{{ piece.nCMD}} </td>
+                      <td class="text-center">{{ piece.nRecept}} </td>
                       <td class="col_NBL"> <input type="text" class="form-control inp_nbl" required> </td>
-                      <td class="text-center">{{ piece.nom }}</td>
-                      <td class="text-center"> {{ piece.prenom }} </td>
-                      <td class="text-center"> {{ piece.numero }} </td>
-
+                      <td class="text-center">{{ piece.fournisseur }}</td>
+                      <td class="text-center"> {{ piece.rayon }} </td>
+                      <td class="text-center"> {{ piece.DReception }} </td>
+                      <td class="text-center"> {{ piece.montantHT }} </td>
                       <td class="col_checkbox"> <input type="checkbox" class="form-control boxcheck" data-id="{{ piece.id }}" ></td>
-
-
-                      {# <td>
-                           <input type="text" class="form-control">
-                       </td>
-                       #}
-
                   </tr>
-
-
-
+                  {% set nbPiece = nbPiece + 1 %}
               {% endfor %}
+             <p> Total des pieces : {{ nbPiece }} </p>
               </tbody>
           </table>
                     </div>
-
                 </div>
               </div>
           </div>
 
-
+          {#  atao disabled le bouton raha mbola tsy feno le nbl#}
           {#  buton enregistrer pour enregistrer les nouvelles valeurs#}
+           {# <button class="btn btn-info float-right" style="margin-right:20px;" onclick="verificatest()"> OK </button> #}
           <a href="{{ path('second_verification',{id: courrier.id}) }}" class="btn btn-dark float-right" style="margin-right:20px;" onclick="Save()"> Suivant</a>
 
-
           <script>
-           
+              //pour verifier si tous les NB_L sont complétés
+              function verificatest()
+              {
+                  var i = 0;
+                  $('.col_NBL').each(function(index,value){
+                      var el_NBL = value.getElementsByClassName('inp_nbl');
+                      var nbl_d = $(el_NBL).val();
+                      if (nbl_d== "")
+                      {
+                          console.log(" champs non complétés");
+
+                      }
+                      else {
+                          var i = i + 1;
+                      }
+                  })
+              }
               //Ajout de ligne
               function ajoutLigne()
               {
 
-                  var contenu = '{{ courrier.nomC }}'
-                  var ligne="<tr class='ligne'><td><input type='checkbox'  name='select' ></td><td>"+contenu+"</td><td><input type='text' class='form-control NBL'  ></td> <td><input type='text' class='form-control nom' name='' ></td> <td><input type='text' name='' class='form-control prenom'></td> <td><input type='text' name='' class='form-control numero'></td> <td><input type='checkbox'  class='form-control box' name='' ></td>";
+                  var ligne="<tr class='ligne'><td><input type='checkbox'  name='select' ></td><td><input type='text' class='form-control cmd'  ></td> <td><input type='text' class='form-control recept'  ></td> <td><input type='text' class='form-control NBL' name='' ></td> <td><input type='text' name='' class='form-control fournisseur'></td> <td><input type='text' name='' class='form-control rayon'></td><td><input type='text' name='' class='form-control reception'></td><td><input type='text' name='' class='form-control montant'></td> <td><input type='checkbox'  class='form-control box' name='' ></td>";
                   $(".table_data > tbody:last").append(ligne);
               }
               //suppression de ligne
@@ -217,7 +201,6 @@
               {
                   var tad = [];
                  $(".table_data").find('input[class ="del"]').each(function(){
-
                      if($(this).is(":checked")) {
                          var cheks = $(this).is(":checked");
                          var idd = $(this).data("ident");
@@ -228,8 +211,6 @@
                          $(this).parents("table.table_data tr").remove();
                          tad.push(ldi);
                      }
-
-
                  })
                      console.log(tad);
                     $.ajax({
@@ -237,88 +218,72 @@
                          method:'POST',
                          data:{tad: tad},
                          success:function(){
-                             alert('le contenu est supprimer');
+                             bootbox.alert('Suppression effectuée');
                          }
-
                      })
-
-
-
-
               }
               //methode pour enregistrer en BD les ajouts et les NBL entrée et le checkbox checker
-              function Save()
-              {
+              function Save() {
                   //colonne NBL
                   var id = {{ courrier.id }}
                   var tab_D = []; //tableau contenant les NBL et si la ligne est valide(checked)
-                 $('.ligne_depart').each(function(index,value)
-                  {
+                  $('.ligne_depart').each(function (index, value) {
                       var el_NBL = value.getElementsByClassName('inp_nbl');
                       var nbl_d = $(el_NBL).val();
                       var el_checkbox = value.getElementsByClassName('boxcheck');
                       var chek = $(el_checkbox).is(":checked");
-
-                    /*  if (chek_del)
-                      {
-                          var id_ligne_suppr = $(this). data("ident");//recuperation de la ligne à supprimer
-                      }*/
-                      var id_ligne =  $(this). data("id");
-
+                      var id_ligne = $(this).data("id");
                       var ld = {
                           'N° BL_D': nbl_d,
                           'check_D': chek,
                           'id_l': id_ligne,
-                          'id_ld': chek,
+
                       }
-                    tab_D.push(ld);
+                      tab_D.push(ld);
                   })
                   console.log('tableau de depart :');
                   console.log(tab_D);
-
-                  //script pour la suppression de ligne
-
-
-
-
-
-
                   //script pour l'ajout de ligne
                   var tab_lignes = [];
-                  $.each($('.ligne') , function (index,value) {
-
+                  $.each($('.ligne'), function (index, value) {
+                      var el_cmd = value.getElementsByClassName('cmd')
+                      var cmd = $(el_cmd).val();
+                      var el_recept = value.getElementsByClassName('recept')
+                      var recept = $(el_recept).val();
                       var el_nbl = value.getElementsByClassName('NBL')
                       var nbl = $(el_nbl).val();
-                      var el_nom = value.getElementsByClassName('nom')
-                      var nom = $(el_nom).val();
-                      var el_prenom = value.getElementsByClassName('prenom')
-                      var prenom = $(el_prenom).val();
-                      var el_numero = value.getElementsByClassName('numero')
-                      var numero = $(el_numero).val();
+                      var el_fourni = value.getElementsByClassName('fournisseur')
+                      var fourni = $(el_fourni).val();
+                      var el_rayon = value.getElementsByClassName('rayon')
+                      var rayon = $(el_rayon).val();
+                      var el_reception = value.getElementsByClassName('reception')
+                      var reception = $(el_reception).val();
+                      var el_montant = value.getElementsByClassName('montant')
+                      var montant = $(el_montant).val();
                       var el_boxcheck = value.getElementsByClassName('box')
                       var boxcheck = $(el_boxcheck).is(":checked");
-
                       var ligne = {
-
-                          'N_BL' : nbl,
-                          'nom' : nom,
-                          'prenom' : prenom,
-                          'numero' : numero,
-                          'boxcheck' : boxcheck,
+                          'n_cmd': cmd,
+                          'n_recept': recept,
+                          'N_BL': nbl,
+                          'fournisseur': fourni,
+                          'rayon': rayon,
+                          'd_reception': reception,
+                          'montant_ht': montant,
+                          'boxcheck': boxcheck,
                       }
                       tab_lignes.push(ligne);
                   });
                   console.log('tableau d\'ajout: ');
                   console.log(tab_lignes);
 
-                  $.ajax({
-                      url:'{{ path('ajax_add_line') }}',
+              $.ajax({
+                      url:'{{  path('ajax_add_line') }}',
                       method:'POST',
                       data:{tab: tab_lignes, id: id, tab_d: tab_D},
                       success:function(){
-                          alert('le contenu est sauvegarder');
+                          console.log('le contenu est sauvegarder');
                       }
-
                   })
               }
               // ajax modification de la valeur de la colone validate
@@ -335,7 +300,4 @@
                   //alert(disabled);
               }
           </script>
-
-
-
   {% endblock %}

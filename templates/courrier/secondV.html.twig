@@ -116,14 +116,11 @@
     
    <fieldset class="border" style="width:400px; height:auto; margin-left:30px;" >
               <legend class="w-auto font-weight-bold "><h3> A propos du courrier </h3> </legend>
-                        <p > <span class="font-weight-bold"> NOM Courrier : </span> {{ courrier.nomC }}  </p>
-                           <p > <span class="font-weight-bold"> Notes : </span> {{ courrier.notes }}  </p>
-                              <p > <span class="font-weight-bold"> Status : </span> {{ courrier.status }}  </p>
-                                 <p > <span class="font-weight-bold"> Destinataire : </span> {{ courrier.recipient.nom }}  </p>
-                      
-
-          </fieldset>
-
+                        <p> <span class="font-weight-bold"> NOM Courrier : </span> {{ courrier.nomC }}  </p>
+                        <p> <span class="font-weight-bold"> Notes : </span> {{ courrier.notes }}  </p>
+                        <p> <span class="font-weight-bold"> Status : </span> {{ courrier.status }}  </p>
+                        <p> <span class="font-weight-bold"> Destinataire : </span> {{ courrier.recipient.nom }}  </p>
+   </fieldset>
     <div class="row text-center" style="margin-top: 30px">
         <div class="col-12 justify-content-center">
             <div class="card card-trap"><div class="card-header">  <h1>Verification</h1></div>
@@ -131,23 +128,30 @@
                     <table class="table table-striped table-bordered" id="data_table2">
                 <thead>
                     <tr>
-                        <th>Nom du courrier</th>
-                        <th> N° BL </th>
-                        <th>nom</th>
-                        <th>prenom</th>
-                        <th>numero</th>
-                       <th class="d-none">Valide 1</th>
-                        <th>Valide</th>
+                        <th class="d-none">id</th>
+                        <th class="text-center" >N° cmd</th>
+                        <th class="text-center" > N° récept </th>
+                        <th class="text-center" >N°BL</th>
+                        <th class="text-center">Fournisseur</th>
+                        <th class="text-center">Rayon</th>
+                        <th class="text-center">D.réception</th>
+                        <th class="text-center">Montant HT</th>
+                        <th class="d-none">Valide 1</th>
+                        <th class="text-center">Valide</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for piece in upload %}
+                {% set nbPiece = 0 %}
+                    {% for piece in pieces %}
                         <tr>
-                            <td>{{ piece.courier.nomC }} </td>
-                            <td> {{ piece.NBL }}</td>
-                            <td>{{ piece.nom }}</td>
-                            <td> {{ piece.prenom }} </td>
-                            <td> {{ piece.numero }} </td>
+                            <td class="d-none"> {{ piece.id }}</td>
+                            <td>{{ piece.nCMD}} </td>
+                            <td>{{ piece.nRecept}} </td>
+                            <td> {{ piece.nBL}} </td>
+                            <td>{{ piece.fournisseur }}</td>
+                            <td> {{ piece.rayon }} </td>
+                            <td> {{ piece.DReception }} </td>
+                            <td> {{ piece.montantHT }} </td>
                             <td class="d-none">
                                 {# afficher l'ancienne validation avec sa valeur true ou false #}
                                 {% set checked = piece.valide != 0 ? 'checked' : ''  %}
@@ -157,22 +161,18 @@
                                 <input type="checkbox" class="form-control v2 " data-id="{{ piece.id }}">
                             </td>
                         </tr>
+                        {% set nbPiece = nbPiece + 1 %}
                     {% endfor %}
-
+                <p> Total des pieces : {{ nbPiece }}</p>
                 </tbody>
-
             </table>
                 </div>
                 <button  class="btn btn-success w-5" onClick="testValidation()"> Envoyer </button>
             </div>
         </div>
     </div>
-
-
     <script>
-
      $('#data_table2').DataTable({
-
             "language": {
                 "lengthMenu": "Afficher _MENU_ données par pages",
                 "zeroRecords": "Nous n'avons rien trouvé - désolé",
@@ -187,7 +187,6 @@
                     "previous": "Précedent"
                 },
             },
-
         });
         //tester si valide 1 = valide 2 sinon mettre une alerte
         function testValidation() {
@@ -197,7 +196,6 @@
                 //recuperer la valeur du checkbox et l'id de celui-ci,
                 var firstCheck = $(this).is(":checked");
                 var id_firstval = $(this).data("ident");
-
                 var valSec = {
                     'id': id_firstval,
                     'checkbo': firstCheck,
@@ -206,31 +204,25 @@
             })
             console.log("v1:");
             console.log(first_tab);
-
-
             //2 eme validation
             var second_tab = [];
             $('.v2').each(function (index, value) {
                 //recuperer la valeur du checkbox et l'id de celui-ci,
                 var secCheck = $(this).is(":checked");
                 var id_secondVal = $(this).data("id");
-
                 var valSec = {
                     'id': id_secondVal,
                     'checkbo': secCheck,
                 }
                 second_tab.push(valSec);
-
             })
             console.log("v2: ");
             console.log(second_tab);
-
             //comparer les 2 tableaux
             if (first_tab.length != second_tab.length) {
                 console.log('erreur de longueur');
             }
-            else {
-
+            else{
                 var reponse = true;
                 for (var i = 0; i < first_tab.length; i++) {
                     //console.log(first_tab[i]['id']);
@@ -251,12 +243,10 @@
                         bootbox.alert('le courrier à été envoyé avec succès');
                         window.location.replace("{{path('send')}}");
                     },
-                  
                     beforeSend: function(){
                                     bootbox.dialog({ 
                                     message: '<div class="text-center"><i class="fa fa-spin fa-spinner"></i> veuillez patientez...</div>', 
                                     closeButton: false })}
-
                 })
             }
             else
@@ -264,8 +254,6 @@
                     console.log("tout n\'est pas ok");
                      bootbox.alert('les validations ne sont pas correctes');
                 }
-
         }
-
     </script>
 {% endblock %}
