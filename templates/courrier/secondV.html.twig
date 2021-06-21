@@ -1,10 +1,8 @@
+{# page du 2 eme verification #}
 {% extends 'base.html.twig' %}
-
 {% block title %} Final {% endblock %}
 {% block navbar %}
-
     <header>
-
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="{{ path('page_index', {id: user.id}) }}"><h2>ACCUEIL</h2></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,15 +64,11 @@
                                 {% endif %}
                             {% endfor %}
                         {% endif %}
-
-
                         <a class="dropdown-item text-center" href="{{ path('received') }}">Voir tous les courriers</a>
                     </div>
-
                     </a>
                 </li>
             </ul>
-
             {# acces de la liste uniquement au utilisateur ayant le role admin #}
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -171,6 +165,8 @@
             </div>
         </div>
     </div>
+
+
     <script>
      $('#data_table2').DataTable({
             "language": {

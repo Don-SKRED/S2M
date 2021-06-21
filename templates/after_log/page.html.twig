@@ -1,7 +1,7 @@
+{# page de d'accueil apres connexion #}
 {% extends 'base.html.twig' %}
 {% block title %} Accueil{% endblock %}
 {% block navbar %}
-
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{{ path('page_index', {id: user.id}) }}"><h2>ACCUEIL</h2></a>
@@ -11,7 +11,7 @@
         <li class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    {#<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>#}
+
                 </li>
             </ul>
         <ul class="navbar-nav">
@@ -34,6 +34,7 @@
                         {% endif %}
                     {# fin #}
                 </a>
+                {# Affichage du courrier sur la navbar #}
                 <div class="dropdown-menu dropdown-menu-right drop" aria-labelledby="receivedDropdown">
                     <h6 class="dropdown-header text-center" >CENTRE COURRIER</h6>
                              {% if app.user.received|length == 0 %}
@@ -68,6 +69,7 @@
             </li>
         </ul>
        {# <div class="topbar-divider d-none d-sm-block"> #}
+            {# acces de la liste des utilisateurs seulement pour les rôles admin#}
             <ul class="navbar-nav">
                 <li class="nav-item">
                     {% if is_granted('ROLE_ADMIN') %}
@@ -141,9 +143,11 @@
                                 <div class="flex-column">
                                     <a href="{{ path("received") }}" class=" btn btn-info btn-block"> Boîte de réception</a>
                                     <a href="{{ path("send") }}" class="btn btn-info btn-block"> Courriers envoyés</a>
+                                    {# bouton pour envoyer un courrier#}
                                     <div class="justify-content-end btn-block">
                                         <a href="" class="btn btn-primary btn-rounded btn-block" data-toggle="modal" data-target="#orangeModalSubscription">Créer un courrier</a>
-                                    </div>
+
+                                        {# formulaire pour le courrier#}
                                     <div class="modal fade" id="orangeModalSubscription" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-notify modal-warning" role="document">

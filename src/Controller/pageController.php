@@ -18,7 +18,6 @@ use PDO;
 use PDOException;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile as files;
@@ -33,6 +32,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
 /**
+ *  @author Fiderana
+ * @author Ruddy
  * @Route("/page")
  * Class PageController
  * @package App\controller
@@ -51,14 +52,14 @@ class pageController extends AbstractController
        catch(PDOException $e){
            echo $e->getMessage();
        }
-       /*
-*/
+
        $courrier = new Courrier();
        $user = $this->getUser();
        $form = $this->createForm(CourrierType::class,$courrier);
        $form->handleRequest($request);
        if($form->isSubmitted() && $form->isValid())
        {
+           //fichier excel
            $file = $courrier->getFichier();
            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
            $typemimes = $file->getClientMimeType();
@@ -131,12 +132,12 @@ class pageController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            //fichier excel
             $file = $courrier->getFichier();
             $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $typemimes = $file->getClientMimeType();
             $newFilename2 = $this->getParameter('upload_directory').'/'.$originalFilename.'-'.uniqid().'.'.$file->getClientOriginalExtension();
             $UploadedFile = $file->move($this->getParameter('upload_directory'), $newFilename2);
-            //dump($test->getPathname());die;
             $courrier->setFichier($newFilename2);
 
             //prendre l'envoyeur
@@ -265,10 +266,8 @@ class pageController extends AbstractController
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-        dump($courrier);
-        dump($this->getUser());
-        $recept = $courrier->getSender();
 
+        $recept = $courrier->getSender();
         $id_courrier = $courrier->getId();
         //reception d'erreur
         $eNotes = $request->request->get('errnotes');
@@ -279,10 +278,17 @@ class pageController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->persist($courrier);
         $em->flush();
-        //atao crochet le izy
-        //lase renomer le nom courrier(rapport d'erreur) refa manao retour
+
+        //rapport d'erreur sur le courrier
         $nomC = explode('[',$courrier->getNomC());
-        $n = $courrier->getNotes() . '/' . $eNotes;
+        $date = new \Datetime();
+        //notes d'erreur
+        //convertir une date en string
+        $dates = date_format($date,"H:i");
+        $envoyeur = $courrier->getRecipient()->getNom();
+
+        //discussiion sur les notes d'erreur
+        $n =$courrier->getNotes() . '~' . $envoyeur.': '. $eNotes.' |'.$dates;
         if ($eNotes != null) {
             $courier->setNotes($n);
                 if (count($nomC)>1)
@@ -296,18 +302,14 @@ class pageController extends AbstractController
                 $courier->setSender($courrier->getRecipient());
                 $courier->setRecipient($recept);
                 $courier->setCreatedAt(new \DateTime());
-                //de le envoyeur si le recepteur mivadika
-                // le courrier zany lasa miala ao amle reception de ny send no mitombo
                 $entityManager->flush();
             }
         $em = $this->getDoctrine()->getManager();
         $em->persist($courrier);
         $em->flush();
       //  $flashy->success('rapport d\'erreur du courrier envoyé avec succès!');
-
         $user = $this->getUser();
         return $this->render('courrier/exShow.html.twig',[
-            //  "form" => $form->createView(),
             "user" => $user,
             "courrier" => $courrier,
             "listeCourrier" => $CourrierRepository->findBy(array('is_verify' => 'true'),
@@ -322,6 +324,7 @@ class pageController extends AbstractController
      */
     public function verify(Request $request, Courrier $courrier, CourrierRepository $CourrierRepository, PiecesRepository $piecesRepository): Response
     {
+        //premiere verification du fichier excel
 
         try
         {
@@ -333,10 +336,9 @@ class pageController extends AbstractController
         }
         $user = $this->getUser();
         $id_courrier = $courrier->getId();
-
-                 return $this->render('courrier/verification.html.twig', [
+        return $this->render('courrier/verification.html.twig', [
                 "courrier" => $courrier,
-               //"data" => $data,
+                "id_courrier" => $id_courrier,
                 "user" => $user,
                 "listeCourrier" => $CourrierRepository->findBy(array('is_verify' => 'true'),
                     array('created_at' =>'desc'),
@@ -350,6 +352,7 @@ class pageController extends AbstractController
      */
     public function second_verification(Request $request, Courrier $courrier, CourrierRepository $CourrierRepository, UploadRepository $uploadRepository,PiecesRepository $piecesRepository): Response
     {
+        //second-verification du fichier excel
         $user = $this->getUser();
         $id_courrier = $courrier->getId();
 
@@ -370,7 +373,7 @@ class pageController extends AbstractController
      */
     public function ajax_validate_courier(Request $request, PiecesRepository $piecesRepository): Response
     {
-
+        //Sur la validation du courrier reçue
         $id = $request->request->get('id'); // recuperation de données envoyer par POST
         $piece = $piecesRepository->find($id);
         $piece->setValideRecipient(!$piece->getValideRecipient());
@@ -441,6 +444,7 @@ class pageController extends AbstractController
      */
     public function ajax_delete_line(Request $request,EntityManagerInterface $entityManager,CourrierRepository $courrierRepository): Response
     {
+        //suppression de ligne
         $tab_del = $request->request->get('tad');
         dump($tab_del[0]["check"]);
         for($i = 0; $i< count($tab_del) ; $i++)
@@ -452,12 +456,41 @@ class pageController extends AbstractController
         }
         return new Response ('ok');
     }
+    /**
+     * @Route("/ajax-cancel", name="ajax_cancel",methods={"POST"})
+     */
+    public function ajax_cancel(Request $request,EntityManagerInterface $entityManager,PiecesRepository $piecesRepository): Response
+    {
+        //suppression de ligne
+        $id_c = $request->request->get('idC');
+       // 
+        $piece =  $piecesRepository->findBy(["courrier" => ["id" => $id_c]]);
+        //recuperer le courrier possedant l'id $id_c
+            $courrier_del = $entityManager->getRepository(Courrier::class)->find($id_c);
+          //voici l'id
+            $courrier_del->getId();
+
+         for($i=0;$i<count($piece);$i++)
+          {
+            $piece_del = $entityManager->getRepository(Pieces::class)->find($piece[$i]->getId());
+            $em =$this->getDoctrine()->getManager();
+            $em->remove($piece_del);
+            $em->flush();
+            //$piece_del = $entityManager->getRepository(Pieces::class)->find($piece[0]->getCourrier()->getId());
+          }
+          $m = $this->getDoctrine()->getManager();
+          $m->remove($courrier_del);
+          $m->flush();
+
+        return new Response ('ok');
+    }
 
     /**
      * @Route("/ajax-validation", name="ajax_validation",methods={"POST"})
      */
     public function ajax_validation(Request $request,EntityManagerInterface $entityManager,CourrierRepository $courrierRepository): Response
     {
+        //apres validation sur la 2 eme verification
         $res = $request->request->get('res');
         $st = $request->request->get('second_tab');
 
@@ -489,6 +522,7 @@ class pageController extends AbstractController
      */
     public function ajax_disabled_courier(Request $request,EntityManagerInterface $entityManager, PiecesRepository $piecesRepository): Response
     {
+        //apres validation du courrier reçue et disabled des checkbox
         $ids = $request->request->get('ids'); // recuperation de données envoyer par POST
         foreach ($ids as $id) {
 

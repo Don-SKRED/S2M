@@ -3,19 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="e7f47f34-5228-4c17-97b6-cec99e2f4578" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/pageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/pageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CourrierType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CourrierType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UserType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/after_log/page.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/after_log/page.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/exShow.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/exShow.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/received.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/received.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/secondV.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/secondV.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/send.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/send.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/courrier/verification.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/courrier/verification.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +39,9 @@
     </option>
     <expand />
     <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="S2M" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -323,7 +324,9 @@
       <workItem from="1623923376810" duration="8378000" />
       <workItem from="1623934011648" duration="3754000" />
       <workItem from="1623941147711" duration="22406000" />
-      <workItem from="1624008991326" duration="8572000" />
+      <workItem from="1624008991326" duration="9731000" />
+      <workItem from="1624105567930" duration="17638000" />
+      <workItem from="1624252511874" duration="6346000" />
     </task>
     <servers />
   </component>
@@ -372,17 +375,21 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="379" y="96" width="607" height="536" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1622743707988" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1623999749701">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1624253278270">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1623999749701" />
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1624253278270" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1624215912827">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1624215912827" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/templates/courrier/exShow.html.twig</url>
-          <line>2</line>
+          <line>3</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">

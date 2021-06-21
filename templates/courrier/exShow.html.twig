@@ -1,3 +1,4 @@
+{# page d'affichage du contenu du fichier excel#}
 {% extends 'base.html.twig' %}
 {% block title %}Pieces{% endblock %}
 {% block navbar %}
@@ -115,48 +116,22 @@
     <fieldset class="border" style="width:400px; height:auto; margin-left:30px;" >
         <legend class="w-auto font-weight-bold "><h3>Notes sur ce courrier</h3> </legend>
 
-        {% set notes= courrier.notes|split('/')%}
+        {% set notes= courrier.notes|split('~')%}
         {% set lnotes = notes|length - 1 %}
+
         {% for note in notes %}
-            <h6> - {{ note }} </h6>
+            <h6>- {{ note }}</h6>
         {% endfor %}
+
+
     </fieldset>
     {#-------------------- notes de retour------------------------#}
-        {#----------- V1--------------#}
-
 
     <fieldset id="joker" class="" style="/*margin:0px;padding:0px;width:500px;height:200px;*/width:500px;position:absolute;right:12px;top:70px;margin-bottom:200px;margin-right:100px;" >
        <legend  class="w-auto">Notes d'erreur</legend>
         <input type="textarea" class="form-control" id="notes">
       <button class="btn btn-outline-warning waves-effect" onclick="renvoyer()"> Envoyer</button>
     </fieldset>
-
-    {#----------- V2--------------
-    <fieldset id="joker" class="" style="margin:0px;padding:0px;width:500px;height:200px;/*width:500px;position:absolute;right:12px;top:70px;margin-bottom:200px;margin-right:100px;*/" >
-        <legend  class="w-auto">Notes d'erreur</legend>
-        {{ form_start(form) }}
-        <div id="notes">
-            {{ form_widget(form.notes) }}
-        </div>
-        <div class="d-none">
-            {{ form_label(form.nom_c) }}
-            {{ form_widget(form.nom_c) }}
-        </div>
-        <div class="d-none">
-            {{ form_label(form.status) }}
-            {{ form_widget(form.status) }}
-        </div>
-        <div class="d-none">
-            {{ form_label(form.recipient) }}
-            {{ form_widget(form.recipient) }}
-        </div>
-        <div class="d-none">
-            {{ form_label(form.fichier) }}
-            {{ form_widget(form.fichier) }}
-        </div>
-        {{ form_widget(form.envoyer) }}
-        {{ form_end(form) }}
-    </fieldset> #}
 
     {#-------------------- fin notes de retour------------------------#}
 
@@ -261,6 +236,7 @@
                     }
                 });
             }
+            //rendre disabled les checkbox
         function setDisabled(arrayIds)
         {
             $.ajax({

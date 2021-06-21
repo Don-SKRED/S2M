@@ -45,14 +45,15 @@ class UserType extends AbstractType
                 'type' => PasswordType::class,
                 'invalid_message' => 'les mots de passes doivent correspondre',
                'options' => ['attr' => ['class' => 'form-control',]],
-               'required' => false,
+
+                'required' => false,
                 'first_options'  => ['label' => 'Mot de passe:'],
                 'second_options' => ['label' => 'Confirmer mot de passe:'],
                 'mapped' => false,
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Entrer un mot de passe',
-                    ]),
+               'constraints' => [
+                   /* new NotBlank([
+                       'message' => 'Entrer un mot de passe',
+                   ]),*/
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Votre mot de passe doit au moins avoir {{ limit }} caractères',

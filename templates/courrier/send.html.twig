@@ -123,6 +123,8 @@
                 <table class="table table-striped table-bordered table_data">
                     <thead>
                         <tr>
+
+                            <th class="d-none">id</th>
                             <th>Vers</th>
                             <th>email du destinataire</th>
                             <th>Nom du courrier</th>
@@ -144,8 +146,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for courrier in app.user.sent|filter(courrier => courrier.isVerify == true)%}
+                    {% for courrier in app.user.sent|reverse|filter(courrier => courrier.isVerify == true)%}
                     <tr>
+                        <td class="d-none">{{courrier.id}}</td>
                         <td>{{ courrier.recipient.Nom }}</td>
                         <td>{{ courrier.recipient.email }}</td>
                         <td>{{ courrier.nomC }}</td>
@@ -165,7 +168,7 @@
                                   {% set lc = courrier.nomC|length - 1 %}
                               </td>
                           {% elseif courrier.valider == 0 %}
-                              {% if courrier.nomC|last == ')' %}
+                              {% if courrier.nomC|last == ']' %}
                                   <td>
                                       <img src="{{ asset('assets/svg/warning_115257.svg') }}" style="height:30px;"></td>
                               {% elseif  courrier.nomC|last == '.'%}

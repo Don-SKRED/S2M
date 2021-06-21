@@ -94,6 +94,18 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            if( $form->get('Password')->getData() != "")
+            {
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('Password')->getData()
+                    ));
+            }
+            else
+            {
+                $user->setPassword($user->getPassword());
+            }
             /* $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
