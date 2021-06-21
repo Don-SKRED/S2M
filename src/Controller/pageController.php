@@ -544,14 +544,14 @@ class pageController extends AbstractController
             {
              $couri->setNomC($nomC[0]);
             }
-         }
+        }
         $couri->setValider(1);
         $em =$this->getDoctrine()->getManager();
         $em->persist($couri);
         $entityManager->flush();
         
-    // si php -> twig
-       // $response = json_encode($nom);
+        //si php -> twig
+        //$response = json_encode($nom);
         return new Response ('ok');
     }
 
