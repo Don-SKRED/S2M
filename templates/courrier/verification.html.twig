@@ -130,7 +130,7 @@
                         <table style="margin-top:30px;" class="table table-striped table-bordered table_data" id="da_tables">
               <thead>
               <tr>
-                  <th class="text-center" style="width:30px" >  idcourrier </th>
+                  <th class="text-center d-none" style="width:30px" >  idcourrier </th>
                   <th class="text-center" style="width:30px" >  choix </th>
                   <th class="text-center" style="width:200px" >N° cmd</th>
                   <th class="text-center" style="width:200px" > N° récept </th>
@@ -149,7 +149,7 @@
               {% for piece in pieces %}
 
                   <tr class="ligne_depart" data-id="{{ piece.id }}">
-                      <td class="id_cour" data-idcour="{{ id_courrier }}"> {{id_courrier}}</td>
+                      <td class="id_cour d-none" data-idcour="{{ id_courrier }}"> {{id_courrier}}</td>
                       <td>  <input type="checkbox" class="del" name="select" data-ident="{{ piece.id }}"> </td>
                       <td class="text-center">{{ piece.nCMD}} </td>
                       <td class="text-center">{{ piece.nRecept}} </td>

@@ -150,7 +150,7 @@
                             <th class="text-center">Rayon</th>
                             <th class="text-center">D.réception</th>
                             <th class="text-center">Montant HT</th>
-                            <th class="text-center">v.envoyeur</th>
+                            <th class="text-center d-none" >v.envoyeur</th>
                             <th class="text-center">Valide</th>
                         </tr>
                         </thead>
@@ -166,10 +166,10 @@
                                     <td> {{ piece.rayon }} </td>
                                     <td> {{ piece.DReception }} </td>
                                     <td> {{ piece.montantHT }} </td>
-                                   <td>
+                                   <td class="d-none">
                                        {#affichage de la validation de l'envoyeur #}
                                     {% set checked = piece.secondValide != 0 ? 'checked' : ''  %}
-                                    <input type="checkbox" {{ checked }} class="form-control"  disabled  >
+                                    <input type="checkbox" {{ checked }} class="form-control "  disabled  >
                                    </td>
 
                                     {% set isChecked = piece.valideRecipient != 0 ? 'checked' : ''  %}

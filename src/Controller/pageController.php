@@ -525,9 +525,7 @@ class pageController extends AbstractController
         //apres validation du courrier reçue et disabled des checkbox
         $ids = $request->request->get('ids'); // recuperation de données envoyer par POST
         foreach ($ids as $id) {
-
             $pieces = $piecesRepository->find($id);
-
             //$upload->setIsDisabled(!$upload->getIsDisabled());
             $pieces->setIsDisabled(true);
             $em =$this->getDoctrine()->getManager();
@@ -536,9 +534,20 @@ class pageController extends AbstractController
         }
 
         //courrier valider
-      $up = $piecesRepository->find($ids[0]);
+        $up = $piecesRepository->find($ids[0]);
         $couri = $entityManager->getRepository(Courrier::class)->find($up->getCourrier()->getId());
+        //au cas où le courrier avec rapport d'erreur est valider enlever le rapport d'erreur
+        $nomC = explode('[',$couri->getNomC());
+        if(count($nomC)>1)
+        {
+            if ($nomC[1] ="rapport d\'erreur]")
+            {
+             $couri->setNomC($nomC[0]);
+            }
+         }
         $couri->setValider(1);
+        $em =$this->getDoctrine()->getManager();
+        $em->persist($couri);
         $entityManager->flush();
         
     // si php -> twig
