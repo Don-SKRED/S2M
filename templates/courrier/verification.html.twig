@@ -127,7 +127,7 @@
                     <div class="card-body">
                         <button class="btn btn-primary add" onclick="ajoutLigne()"> Ajouter </button>
                         <button class="btn btn-danger del" onclick="delLigne()" title ="Pour supprimer une ou plusieurs lignes cliquer sur une des cases à cocher correspondant de la colonne choix"> supprimer </button>
-                        <table style="margin-top:30px;" class="table table-striped table-bordered table_data" id="da_tables">
+                        <table style="margin-top:30px;" class="table table-striped table-bordered table_data">
               <thead>
               <tr>
                   <th class="text-center d-none" style="width:30px" >  idcourrier </th>
@@ -162,7 +162,7 @@
                   </tr>
                   {% set nbPiece = nbPiece + 1 %}
               {% endfor %}
-             <p> Total des pieces : {{ nbPiece }} </p>
+             <p> Total des pieces : <span class="valeur">{{ nbPiece }}</span> </p>
               </tbody>
           </table>
                     </div>
@@ -194,8 +194,14 @@
               function ajoutLigne()
               {
 
-                  var ligne="<tr class='ligne'><td><input type='checkbox'  name='select' ></td><td><input type='text' class='form-control cmd'  ></td> <td><input type='text' class='form-control recept'  ></td> <td><input type='text' class='form-control NBL' name='' ></td> <td><input type='text' name='' class='form-control fournisseur'></td> <td><input type='text' name='' class='form-control rayon'></td><td><input type='text' name='' class='form-control reception'></td><td><input type='text' name='' class='form-control montant'></td> <td><input type='checkbox'  class='form-control box' name='' ></td>";
+                  var ligne="<tr class='ligne'><td><input type='checkbox' class='del'  name='select' ></td><td><input type='text' class='form-control cmd'  ></td> <td><input type='text' class='form-control recept'  ></td> <td><input type='text' class='form-control NBL' name='' ></td> <td><input type='text' name='' class='form-control fournisseur'></td> <td><input type='text' name='' class='form-control rayon'></td><td><input type='text' name='' class='form-control reception'></td><td><input type='text' name='' class='form-control montant'></td> <td><input type='checkbox'  class='form-control box' name='' ></td>";
                   $(".table_data > tbody:last").append(ligne);
+                 // modification du total de piece
+                  var val = $('.valeur').text()
+                      var val_ajout = parseInt( $('.valeur').text()) + 1;
+                  $('.valeur').text(val_ajout);
+                  console.log(val_ajout);
+                  //$('.valeur').replaceAll(val_ajout);
               }
               //suppression de ligne
               function delLigne()
@@ -214,12 +220,21 @@
                      }
                  })
                      console.log(tad);
+                     // modification du total de piece
+                    var long = tad.length;
+                    console.log(long);
+                    var val_del = parseInt($('.valeur').text()) - long;
+                    $('.valeur').text(val_del);
+                    console.log(val_del);
+
                     $.ajax({
                          url:'{{ path('ajax_delete_line') }}',
                          method:'POST',
                          data:{tad: tad},
                          success:function(){
                              bootbox.alert('Suppression effectuée');
+
+
                          }
                      })
               }

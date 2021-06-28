@@ -115,6 +115,7 @@
                         <p> <span class="font-weight-bold"> Status : </span> {{ courrier.status }}  </p>
                         <p> <span class="font-weight-bold"> Destinataire : </span> {{ courrier.recipient.nom }}  </p>
    </fieldset>
+    {#<a href="{{ path('verify',{id: courrier.id}) }}" class="btn btn-secondary">Retour</a>#}
     <div class="row text-center" style="margin-top: 30px">
         <div class="col-12 justify-content-center">
             <div class="card card-trap"><div class="card-header">  <h1>Verification</h1></div>
@@ -168,23 +169,7 @@
 
 
     <script>
-     $('#data_table2').DataTable({
-         paging: false, info: false,
-            "language": {
-                "lengthMenu": "Afficher _MENU_ données par pages",
-                "zeroRecords": "Nous n'avons rien trouvé - désolé",
-                "info": " page _PAGE_ sur _PAGES_",
-                "infoEmpty": "Aucun enregistrement disponibles",
-                "infoFiltered": "(Filtrer à partir de _MAX_ enregistrement)",
-                "search": "Rechercher:",
-                "paginate": {
-                    "first": "Premier",
-                    "last": "Dernier",
-                    "next": "Suivant",
-                    "previous": "Précedent"
-                },
-            },
-        });
+
         //tester si valide 1 = valide 2 sinon mettre une alerte
         function testValidation() {
             //1 ere validation

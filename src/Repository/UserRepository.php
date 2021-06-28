@@ -40,10 +40,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     //  * @return User[] Returns an array of User objects
     //  */
  
-    public function findOtherUser($id)
+   public function findOtherUser(User $user)
     {
 
-        /*$req =  $this->createQueryBuilder('u');
+      /*  $req =  $this->createQueryBuilder('u');
         $req->where('u.nom' != ':Nom')
 
         ->setParameter('Nom', $nom)
@@ -55,12 +55,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         // automatically knows to select Products
         // the "p" is an alias you'll use in the rest of the query
         $qb = $this->createQueryBuilder('u')
-            ->where('u.id != :id')
-            ->setParameter('id', $id)
-            ->orderBy('u.id', 'ASC');
-        $query = $qb->getQuery();
+            ->where('u.id != :user')
+            ->setParameter('user', $user->getId())
+            ->orderBy('u.id', 'DESC');
+       // $query = $qb->getQuery();
 
-        return $query->getResult();
+       //return $query->getResult();
     }
     
 

@@ -6,6 +6,7 @@ use App\Entity\Courrier;
 use App\Repository\CourrierRepository;
 use App\Repository\UserRepository;
 use App\Entity\User;
+
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,8 +20,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CourrierType extends AbstractType
 {
+
+/*public function __construct (User $user)
+{
+    $this->user = $user;
+}*/
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+       // $user = $options['user'];
+            //$user =$this->user;
         $builder
             ->add('nom_c',TextType::class,[
                 'required' => false,
@@ -91,6 +100,8 @@ class CourrierType extends AbstractType
                 "class" => User::class,
                 'label' => 'Destinataire',
                 "choice_label" => "Nom",
+              /* 'query_builder' => function(UserRepository $repository) use($user){
+                    return $repository->findOtherUser($user);},*/
                 "attr" => [
                     "class" => "form-control"
                 ]])
@@ -121,6 +132,8 @@ class CourrierType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Courrier::class,
+            //'user' => false,
+
         ]);
     }
 }

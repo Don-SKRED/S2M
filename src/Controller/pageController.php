@@ -32,7 +32,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
 /**
- *  @author Fiderana
+ * @author Fiderana
  * @author Ruddy
  * @Route("/page")
  * Class PageController
@@ -116,7 +116,7 @@ class pageController extends AbstractController
     /**
      * @Route("/send", name="send")
      */
-    public function send(Request $request, FlashyNotifier $flashy, CourrierRepository $CourrierRepository):Response
+    public function send(UserRepository $userRepository,Request $request, FlashyNotifier $flashy, CourrierRepository $CourrierRepository):Response
     {
         try
         {
@@ -126,10 +126,15 @@ class pageController extends AbstractController
        {
            echo $e->getMessage();
        }
+         
         $courrier = new Courrier();
+
         $user = $this->getUser();
+       // dump($userRepository->findOtherUser($user->getNom()));die;
         $form = $this->createForm(CourrierType::class,$courrier);
-        $form->handleRequest($request);
+        //   $form= $this->createForm(CourrierType::class, $courrier, ['user' => $user->getid()]);
+           $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid())
         {
             //fichier excel
@@ -365,6 +370,11 @@ class pageController extends AbstractController
             'pieces' => $piecesRepository->findBy(["courrier" => ["id" => $id_courrier]],["id" => 'desc']),
         ]);
     }
+   /* function doSomething($param){
+        // je traite le param
+        $ret = json_encode($param);
+       return $ret;// toujou sring
+    }*/
 
 
     //Tous les traitements Ajax sont effectues ci-dessous
@@ -380,8 +390,9 @@ class pageController extends AbstractController
         $em =$this->getDoctrine()->getManager();
         $em->persist($piece);
         $em->flush();
+    //    $ret = $this->doSomething($param);
 
-        return new Response ("ok");
+        return new Response ('ok');
     }
 
 

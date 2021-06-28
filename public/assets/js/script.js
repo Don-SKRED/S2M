@@ -1,6 +1,6 @@
 $(document).ready(function($) {
-    $('.table_data').DataTable({
-        paging: false, info: false,
+    $('.tab_data').DataTable({
+
             "language": {
                 "lengthMenu": "Afficher _MENU_ données par pages",
                 "zeroRecords": "Nous n'avons rien trouvé - désolé",
@@ -25,8 +25,8 @@ $(document).ready(function($) {
              ]
         });
 
-    $('.table_data2').DataTable({
-      
+    $('.table_data').DataTable({
+        paging: false, info: false,
         "language": {
             "lengthMenu": "Afficher _MENU_ données par pages",
             "zeroRecords": "Nous n'avons rien trouvé - désolé",
@@ -43,7 +43,7 @@ $(document).ready(function($) {
         },
 
     });
-     $('#data_table').DataTable({
+     $('#data_table2').DataTable({
     paging: false, info: false,
             "language": {
                 "lengthMenu": "Afficher _MENU_ données par pages",
